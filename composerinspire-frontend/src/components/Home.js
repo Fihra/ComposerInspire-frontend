@@ -5,6 +5,7 @@ class Home extends React.Component {
         return(
             <div>
                 <h1>MusicInspire</h1>
+                <p>This website is for a user to sign up and create a project manager of ideas they would have for a new music composition piece. </p>
             </div>
         )
     }

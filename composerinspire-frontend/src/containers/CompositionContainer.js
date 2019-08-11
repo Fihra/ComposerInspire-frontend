@@ -1,14 +1,31 @@
 import React from 'react';
 import CompositionCard from '../components/CompositionCard';
+import NewComposition from '../components/NewComposition';
+import { BrowserRouter as Link } from 'react-router-dom';
 
 class Composition extends React.Component {
     
-    allCompositions = () => {
-        return this.props.allCompositions.map((comp) => {
-            return <CompositionCard comp={comp} showOneComp={this.props.showOneComp}/>
-        })
+    // componentDidMount(){
+    //     this.state = {
+    //         show: false
+    //     }
+    // }
 
+    allCompositions = () => {
+        return this.props.allComps.map((comp, i) => {
+            return <CompositionCard key={i} comp={comp} showOneComp={this.props.showOneComp} fetchDeleteComp={this.props.fetchDeleteComp} />
+        })
     } 
+
+    // showNewForm = () => {
+    //     this.setState({
+    //         show: true
+    //     })
+    // }
+
+    newCompPath = (path) => {
+        this.props.history.push(path);
+    }
 
     render(){
         
@@ -16,6 +33,14 @@ class Composition extends React.Component {
             <div>
                 <h2>My Compositions</h2>
                 {this.allCompositions()}
+                <div>
+                    
+                    <button onClick={()=> this.newCompPath('/newcomposition')}>[+] Add New Composition</button>
+                    {/* <Link to="/newcomposition">[+] Add New Composition</Link> */}
+
+
+                    {/* {this.state.show && <NewComposition />} */}
+                </div>
             </div>
         )
     }

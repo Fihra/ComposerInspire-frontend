@@ -1,9 +1,9 @@
 import React from 'react';
 
-// const SingleComposition = (props) => {
 class SingleComposition extends React.Component {
     state = {
-        class: "hidden"
+        class: "hidden",
+        done: false
     }
 
     goingBack = () =>{
@@ -22,11 +22,10 @@ class SingleComposition extends React.Component {
           }
         }
     
-    handleSubmit = (ev) => {
-        ev.preventDefault();
-        console.log(ev)
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.updateTitle(event, this.props.comp)
     }
-
 
     render(){
         const {title} = this.props.comp
@@ -35,10 +34,12 @@ class SingleComposition extends React.Component {
             <div>
                 <button onClick={this.goingBack}>Back to Compositions</button>
                 <h4>{title} <button onClick={this.handleEditClick}>Edit</button></h4>
-                <form className={this.state.class} onSubmit={this.handleSubmit}>
-                    <input name="title" type="text" value={title}></input>
+                {!this.state.done && (
+                <form className={this.state.class} onSubmit={(e) => this.handleSubmit(e)}>
+                    <input name="formTitleName" type="text" value={this.props.formTitleName} onChange={this.props.handleTitleInput}></input>
                     <input type="submit" value="Submit"/>
                 </form>
+                )}
                 <p>More Info goes here</p>
             </div>
         )

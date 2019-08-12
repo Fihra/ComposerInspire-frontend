@@ -1,6 +1,6 @@
 import React from 'react';
 import CompositionCard from '../components/CompositionCard';
-import NewComposition from '../components/NewComposition';
+import NewComposition from '../NewForms/NewComposition';
 import { BrowserRouter as Link } from 'react-router-dom';
 
 class Composition extends React.Component {
@@ -31,6 +31,7 @@ class Composition extends React.Component {
         
         return(
             <div>
+                {console.log(this.props)}
                 <h2>My Compositions</h2>
                 {this.allCompositions()}
                 <div>

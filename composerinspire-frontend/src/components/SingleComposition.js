@@ -1,4 +1,5 @@
 import React from 'react';
+import SongreferenceCard from './SongreferenceCard';
 
 class SingleComposition extends React.Component {
     state = {
@@ -7,7 +8,7 @@ class SingleComposition extends React.Component {
     }
 
     goingBack = () =>{
-        this.props.history.goBack();
+        this.props.history.push("/compositions/");
     }
 
     handleEditClick = () => {
@@ -24,16 +25,28 @@ class SingleComposition extends React.Component {
     
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.updateTitle(event, this.props.comp)
+        this.props.updateTitle(this.props.comp)
+        this.props.history.goBack();
+        // this.props.history.push(`/compositions/${this.props.comp.id}`)
+    }
+
+    showSongReferences = (songRefs) => {
+        return songRefs.map((song, i) => {
+            return <SongreferenceCard key={i} song={song} />
+        })
+    }
+
+    handleSongRefClick = () => {
+        this.props.history.push(`/compositions/${this.props.comp.id}/newsongreference`)
     }
 
     render(){
-        const {title} = this.props.comp
+        const {title, songreferences} = this.props.comp
 
         return(
             <div>
                 <button onClick={this.goingBack}>Back to Compositions</button>
-                <h4>{title} <button onClick={this.handleEditClick}>Edit</button></h4>
+                <h3>{title} <button onClick={this.handleEditClick}>Edit</button></h3>
                 {!this.state.done && (
                 <form className={this.state.class} onSubmit={(e) => this.handleSubmit(e)}>
                     <input name="formTitleName" type="text" value={this.props.formTitleName} onChange={this.props.handleTitleInput}></input>
@@ -41,6 +54,10 @@ class SingleComposition extends React.Component {
                 </form>
                 )}
                 <p>More Info goes here</p>
+                <h4>Song References<button onClick={(e) => this.handleSongRefClick(e)}>+</button></h4>
+                {songreferences ? this.showSongReferences(songreferences): <div></div>}
+                {/* {songreferences.length !== 0 ? this.showSongReferences(songreferences) : <div></div>} */}
+                
             </div>
         )
     }

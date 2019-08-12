@@ -2,14 +2,16 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import SignUp from './components/SignUp';
+import SignUp from './NewForms/SignUp';
 import Login from './components/Login';
 import CompositionContainer from './containers/CompositionContainer';
 import SingleComposition from './components/SingleComposition';
-import NewComposition from './components/NewComposition';
+import NewComposition from './NewForms/NewComposition';
+import NewSongRef from './NewForms/NewSongRef';
 
 
 const compositionsURL = "http://localhost:3000/compositions"
+const songreferencesURL = "http://localhost:3000/songreferences"
 
 class App extends React.Component {
   
@@ -25,10 +27,14 @@ class App extends React.Component {
       /* New Composition State */
       newTitleForm: "",
 
-
       /*Update Title State */
       titleName: "Change Title",
-      formTitleName: ""
+      formTitleName: "",
+
+      /* New Song Reference State */
+      newSongTitle: "",
+      newArtist: "",
+      newYoutubeURL: ""
     }
   }
 
@@ -94,7 +100,7 @@ class App extends React.Component {
     })
   }
 
-  updateTitle = (event, comp) => {
+  updateTitle = (comp) => {
 
     let newTitle = this.state.formTitleName
 
@@ -105,7 +111,8 @@ class App extends React.Component {
         "Accepts": "application/json"
       },
       body: JSON.stringify({
-        title: newTitle
+        title: newTitle,
+        user_id: 1
       })
     })
     .then(resp => resp.json())
@@ -140,8 +147,37 @@ class App extends React.Component {
       })
     })
   }
-
   /*-------------------- */
+
+   /* New Song Reference */
+    handleNewSongRefInput = (event) => {
+      event.persist();
+      this.setState({
+        [event.target.name]: event.target.value
+      })
+    }
+
+    submitNewSongRef = (comp) => {
+      console.log(comp)
+      let submission = {
+        song_title: this.state.newSongTitle,
+        artist: this.state.newArtist,
+        youtube_url: this.state.newYoutubeURL,
+        composition_id: this.state.selectedComp.id
+      }
+
+      fetch(`${songreferencesURL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accepts": "application/json"
+        },
+        body: JSON.stringify(submission)
+      })
+      .then(resp => resp.json())
+    }
+
+   /* ------------------ */
  
   render(){
     return (
@@ -158,14 +194,15 @@ class App extends React.Component {
         {/* Composition Container */}
         <Route exact path='/compositions' render={ (routerProps) => (<CompositionContainer {...routerProps} allComps={this.state.compositions} showOneComp={this.showOneComp} fetchDeleteComp={this.fetchDeleteComp}/>)}/>
         {/* Single Composition */}
-        <Route exact path='/compositions/:id'render={(routerProps) => (<SingleComposition {...routerProps}comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} /> )}/>
+        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps}comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} /> )}/>
         {/* New Composition */}
         <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp}/>)} />
+        {/* New Song Reference */}
+        <Route exact path='/compositions/:id/newsongreference' render={(routerProps) => (<NewSongRef {...routerProps} handleNewSongRefInput={this.handleNewSongRefInput} submitNewSongRef={this.submitNewSongRef} selectedComp={this.state.selectedComp}/>)} />
         </div>
       </Router> 
     )
   }
-
 }
 
 export default App;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from './Login';
-import SignUp from './SignUp';
+import SignUp from '../NewForms/SignUp';
 
 class Home extends React.Component {
     render(){

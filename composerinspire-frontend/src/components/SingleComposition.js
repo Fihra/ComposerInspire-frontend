@@ -32,7 +32,7 @@ class SingleComposition extends React.Component {
 
     showSongReferences = (songRefs) => {
         return songRefs.map((song, i) => {
-            return <SongreferenceCard key={i} song={song} />
+            return <SongreferenceCard key={i} song={song} deleteSongRef={this.props.deleteSongRef}/>
         })
     }
 

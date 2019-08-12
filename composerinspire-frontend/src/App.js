@@ -126,16 +126,6 @@ class App extends React.Component {
 
   /* Delete Composition */
 
-  // deleteComp = (comp) => {
-  //   let newComps;
-  //   return newComps = this.state.compositions.filter((aComp) => {
-  //      return aComp.id !== comp
-  //   })
-  //   this.setState({
-  //     compositions: newComps
-  //   })
-  // } 
-
   fetchDeleteComp = (comp) => {
     fetch(`${compositionsURL}/${comp.id}`, {
       method: "DELETE"
@@ -178,6 +168,17 @@ class App extends React.Component {
     }
 
    /* ------------------ */
+
+   /* Delete Song Reference */
+
+    deleteSongRef = (songRef) => {
+      fetch(`${songreferencesURL}/${songRef.id}`,{
+        method: "DELETE"
+      })
+      .then(resp => resp.json())
+    }
+    //Pass the function to the SongreferenceCard Component
+   /* --------------------- */
  
   render(){
     return (
@@ -194,11 +195,11 @@ class App extends React.Component {
         {/* Composition Container */}
         <Route exact path='/compositions' render={ (routerProps) => (<CompositionContainer {...routerProps} allComps={this.state.compositions} showOneComp={this.showOneComp} fetchDeleteComp={this.fetchDeleteComp}/>)}/>
         {/* Single Composition */}
-        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps}comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} /> )}/>
+        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef}/> )}/>
         {/* New Composition */}
         <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp}/>)} />
         {/* New Song Reference */}
-        <Route exact path='/compositions/:id/newsongreference' render={(routerProps) => (<NewSongRef {...routerProps} handleNewSongRefInput={this.handleNewSongRefInput} submitNewSongRef={this.submitNewSongRef} selectedComp={this.state.selectedComp}/>)} />
+        <Route exact path='/compositions/:id/newsongreference' render={(routerProps) => (<NewSongRef {...routerProps} handleNewSongRefInput={this.handleNewSongRefInput} submitNewSongRef={this.submitNewSongRef} selectedComp={this.state.selectedComp} />)} />
         </div>
       </Router> 
     )

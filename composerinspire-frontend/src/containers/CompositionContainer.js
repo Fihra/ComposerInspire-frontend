@@ -31,7 +31,6 @@ class Composition extends React.Component {
         
         return(
             <div>
-                {console.log(this.props)}
                 <h2>My Compositions</h2>
                 {this.allCompositions()}
                 <div>

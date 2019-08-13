@@ -67,7 +67,9 @@ class App extends React.Component {
   /* Show One Composition */
   showOneComp = (comp) => {
     this.setState({
-      selectedComp: comp
+      selectedComp: comp,
+      selectedComp_refs: comp.songreferences,
+      selectedComp_scales: comp.scales
     })  
   }
   /*-------------------- */
@@ -200,8 +202,27 @@ class App extends React.Component {
     }
 
     submitScale = () => {
-      console.log("Submitting: ", this.state.newScale)
+      fetch(scalesURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accepts": "application/json"
+        },
+        body: JSON.stringify({
+          scale_name: this.state.newScale,
+          composition_id: this.state.selectedComp.id
+        })
+      })
+      .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          selectedComp_scales: [...this.state.selectedComp_scales, json]
+        })
+      })
     }
+
+    /* Delete Scale */
+    
 
     /* ----------------- */
 
@@ -221,7 +242,7 @@ class App extends React.Component {
         {/* Composition Container */}
         <Route exact path='/compositions' render={ (routerProps) => (<CompositionContainer {...routerProps} allComps={this.state.compositions} showOneComp={this.showOneComp} fetchDeleteComp={this.fetchDeleteComp}/>)}/>
         {/* Single Composition */}
-        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef}/> )}/>
+        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs}/> )}/>
         {/* New Composition */}
         <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp}/>)} />
         {/* New Song Reference */}

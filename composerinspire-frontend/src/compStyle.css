@@ -1,6 +1,12 @@
+/* Hidden class for editing 
+   Compositition title form
+*/
+
 .hidden {
     display: none;
 }
+
+/* Image for Music Scales */
 
 .scale-img {
     width: 40%;

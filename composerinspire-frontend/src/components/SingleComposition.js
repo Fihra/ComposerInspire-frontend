@@ -45,7 +45,7 @@ class SingleComposition extends React.Component {
     /* Scales Functions */
     showScales = (scales) => {
         return scales.map((scale, i) => {
-            return <ScaleCard key={i} scale={scale} />
+            return <ScaleCard key={i} scale={scale} deleteScale={this.props.deleteScale}/>
         })
     }
 
@@ -56,8 +56,6 @@ class SingleComposition extends React.Component {
 
     render(){
         const {title} = this.props.comp
-        // const {scales} = this.props.compScales
-        // const {songrefs} = this.props.compRefs
 
         return(
             <div>

@@ -3,7 +3,7 @@ import React from 'react';
 const SongreferenceCard = (props) => {
     const embedYoutubeURL = (yt) => {
         let toEmbed = yt.replace("watch?v=", "embed/")
-        return <iframe src={toEmbed}/>
+        return <iframe src={toEmbed} title={song_title}/>
     }
 
     const handleDeleteClick = () => {

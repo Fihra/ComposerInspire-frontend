@@ -1,12 +1,12 @@
 import React from 'react';
 import AllScales from '../assets/AllScales';
-import { Form, Button, Dropdown } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 
 class NewScale extends React.Component{
 
     showAllScales = () => {
         return Object.keys(AllScales).map((scale, i) =>{
-            // console.log(scale)
+            console.log(scale)
             let splitScaleName = scale.split("-");
             // splitScaleName[0].charAt(0).toUpperCase();
             let scaleName = splitScaleName.join(' ');
@@ -27,7 +27,9 @@ class NewScale extends React.Component{
     }
 
     handleScaleSubmit = () => {
+        //VALIDATE SCALE IF IT ALREADY EXISTS
         this.props.submitScale();
+        this.props.history.push(`/compositions/${this.props.selectedComp.id}`)
     }
 
     render(){

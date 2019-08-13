@@ -8,6 +8,7 @@ class NewSongRef extends React.Component{
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.submitNewSongRef(this.props.selectedComp)
+        //TODO: Redirect Back to Compositions
         // this.props.submitNewComp(e)
         // this.props.history.push('/compositions')
     }

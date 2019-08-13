@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import SignUp from './NewForms/SignUp';
@@ -194,8 +194,6 @@ class App extends React.Component {
 
     /* New Scale */
     handleNewScaleChoice = (scaleChoice) => {
-      // event.persist();
-      console.log(scaleChoice)
       this.setState({
         newScale: scaleChoice
       })
@@ -222,7 +220,20 @@ class App extends React.Component {
     }
 
     /* Delete Scale */
-    
+    deleteScale = (scale) => {
+      let newSelectedComp_scales = this.state.selectedComp_scales.filter((eachScale) => {return eachScale !== scale
+      })
+
+      fetch(`${scalesURL}/${scale.id}`, {
+        method: "DELETE"
+      })
+      .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          selectedComp_scales: newSelectedComp_scales
+        })
+      })
+    }
 
     /* ----------------- */
 
@@ -242,7 +253,7 @@ class App extends React.Component {
         {/* Composition Container */}
         <Route exact path='/compositions' render={ (routerProps) => (<CompositionContainer {...routerProps} allComps={this.state.compositions} showOneComp={this.showOneComp} fetchDeleteComp={this.fetchDeleteComp}/>)}/>
         {/* Single Composition */}
-        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs}/> )}/>
+        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} /> )}/>
         {/* New Composition */}
         <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp}/>)} />
         {/* New Song Reference */}

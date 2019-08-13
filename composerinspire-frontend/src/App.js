@@ -27,7 +27,7 @@ class App extends React.Component {
       selectedComp: [],
 
       /*TODO: Song References State based on selectedComp */
-      selectedComp_refs: [],//TODO!!!
+      selectedComp_refs: [],
 
       selectedComp_scales: [],
 
@@ -160,7 +160,6 @@ class App extends React.Component {
     }
 
     submitNewSongRef = (comp) => {
-      console.log(comp)
       let submission = {
         song_title: this.state.newSongTitle,
         artist: this.state.newArtist,
@@ -177,6 +176,12 @@ class App extends React.Component {
         body: JSON.stringify(submission)
       })
       .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          selectedComp_refs: [...this.state.selectedComp_refs, json]
+        })
+      })
+      
     }
 
    /* ------------------ */
@@ -184,10 +189,19 @@ class App extends React.Component {
    /* Delete Song Reference */
 
     deleteSongRef = (songRef) => {
+      let newSelectedComp_refs = this.state.selectedComp_refs.filter((eachRef) => {
+        return eachRef !== songRef
+      })
+
       fetch(`${songreferencesURL}/${songRef.id}`,{
         method: "DELETE"
       })
       .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          selectedComp_refs: newSelectedComp_refs
+        })
+      })
     }
     //Pass the function to the SongreferenceCard Component
    /* --------------------- */

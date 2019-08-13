@@ -9,8 +9,7 @@ class NewSongRef extends React.Component{
         e.preventDefault();
         this.props.submitNewSongRef(this.props.selectedComp)
         //TODO: Redirect Back to Compositions
-        // this.props.submitNewComp(e)
-        // this.props.history.push('/compositions')
+        this.props.history.push(`/compositions/${this.props.selectedComp.id}`)
     }
 
     render(){

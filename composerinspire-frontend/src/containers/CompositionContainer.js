@@ -1,7 +1,6 @@
 import React from 'react';
 import CompositionCard from '../components/CompositionCard';
-import NewComposition from '../NewForms/NewComposition';
-import { BrowserRouter as Link } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
 
 class Composition extends React.Component {
     
@@ -27,6 +26,11 @@ class Composition extends React.Component {
         this.props.history.push(path);
     }
 
+    /*Add New Composition Button */
+    addButton = () => {
+        return <Button onClick={()=> this.newCompPath('/newcomposition')}>[+] Add New Composition</Button>
+    }
+
     render(){
         
         return(
@@ -34,8 +38,8 @@ class Composition extends React.Component {
                 <h2>My Compositions</h2>
                 {this.allCompositions()}
                 <div>
-                    
-                    <button onClick={()=> this.newCompPath('/newcomposition')}>[+] Add New Composition</button>
+                    {this.addButton()}
+                    {/* <button onClick={()=> this.newCompPath('/newcomposition')}>[+] Add New Composition</button> */}
                     {/* <Link to="/newcomposition">[+] Add New Composition</Link> */}
 
 

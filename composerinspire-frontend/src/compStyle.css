@@ -1,3 +1,13 @@
 .hidden {
     display: none;
 }
+
+.scale-img {
+    width: 40%;
+    height: auto;
+}
+
+.choose-scale-img {
+    width: 10%;
+    height: 10%;
+}

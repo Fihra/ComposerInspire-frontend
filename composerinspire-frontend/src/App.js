@@ -8,10 +8,12 @@ import CompositionContainer from './containers/CompositionContainer';
 import SingleComposition from './components/SingleComposition';
 import NewComposition from './NewForms/NewComposition';
 import NewSongRef from './NewForms/NewSongRef';
+import NewScale from './NewForms/NewScale';
 
 
 const compositionsURL = "http://localhost:3000/compositions"
 const songreferencesURL = "http://localhost:3000/songreferences"
+const scalesURL = "http://localhost:3000/scales"
 
 class App extends React.Component {
   
@@ -24,6 +26,11 @@ class App extends React.Component {
       /* One Composition */
       selectedComp: [],
 
+      /*TODO: Song References State based on selectedComp */
+      selectedComp_refs: [],//TODO!!!
+
+      selectedComp_scales: [],
+
       /* New Composition State */
       newTitleForm: "",
 
@@ -34,7 +41,10 @@ class App extends React.Component {
       /* New Song Reference State */
       newSongTitle: "",
       newArtist: "",
-      newYoutubeURL: ""
+      newYoutubeURL: "",
+
+      newScale: ""
+
     }
   }
 
@@ -179,6 +189,22 @@ class App extends React.Component {
     }
     //Pass the function to the SongreferenceCard Component
    /* --------------------- */
+
+    /* New Scale */
+    handleNewScaleChoice = (scaleChoice) => {
+      // event.persist();
+      console.log(scaleChoice)
+      this.setState({
+        newScale: scaleChoice
+      })
+    }
+
+    submitScale = () => {
+      console.log("Submitting: ", this.state.newScale)
+    }
+
+    /* ----------------- */
+
  
   render(){
     return (
@@ -200,6 +226,8 @@ class App extends React.Component {
         <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp}/>)} />
         {/* New Song Reference */}
         <Route exact path='/compositions/:id/newsongreference' render={(routerProps) => (<NewSongRef {...routerProps} handleNewSongRefInput={this.handleNewSongRefInput} submitNewSongRef={this.submitNewSongRef} selectedComp={this.state.selectedComp} />)} />
+        {/* New Scale */}
+        <Route exact path='/compositions/:id/newscale' render={(routerProps) => (<NewScale {...routerProps} selectedComp={this.state.selectedComp} handleNewScaleChoice={this.handleNewScaleChoice} submitScale={this.submitScale}/>)}/>
         </div>
       </Router> 
     )

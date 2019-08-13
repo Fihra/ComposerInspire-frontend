@@ -1,5 +1,6 @@
 import React from 'react';
 import SongreferenceCard from './SongreferenceCard';
+import ScaleCard from './ScaleCard';
 
 class SingleComposition extends React.Component {
     state = {
@@ -40,8 +41,18 @@ class SingleComposition extends React.Component {
         this.props.history.push(`/compositions/${this.props.comp.id}/newsongreference`)
     }
 
+    showScales = (scales) => {
+        return scales.map((scale, i) => {
+            return <ScaleCard key={i} scale={scale} />
+        })
+    }
+
+    handleScaleClick = (e) => {
+        this.props.history.push(`/compositions/${this.props.comp.id}/newscale`)
+    }
+
     render(){
-        const {title, songreferences} = this.props.comp
+        const {title, songreferences, scales} = this.props.comp
 
         return(
             <div>
@@ -56,8 +67,8 @@ class SingleComposition extends React.Component {
                 <p>More Info goes here</p>
                 <h4>Song References<button onClick={(e) => this.handleSongRefClick(e)}>+</button></h4>
                 {songreferences ? this.showSongReferences(songreferences): <div></div>}
-                {/* {songreferences.length !== 0 ? this.showSongReferences(songreferences) : <div></div>} */}
-                
+                <h4>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}>+</button></h4>
+                {scales ? this.showScales(scales): <div></div>}
             </div>
         )
     }

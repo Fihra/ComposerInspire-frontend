@@ -6,7 +6,7 @@ class NewScale extends React.Component{
 
     showAllScales = () => {
         return Object.keys(AllScales).map((scale, i) =>{
-            console.log(scale)
+            // console.log(scale)
             let splitScaleName = scale.split("-");
             // splitScaleName[0].charAt(0).toUpperCase();
             let scaleName = splitScaleName.join(' ');

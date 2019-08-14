@@ -262,6 +262,7 @@ class App extends React.Component {
     }
 
     /* ----------------- */
+    /* ----New Jot------ */
 
     handleNewJotInput = (event) => {
         event.persist();
@@ -292,6 +293,25 @@ class App extends React.Component {
       })
     }
 
+    deleteJot = (jot) => {
+      let newSelectedComp_jots = this.state.selectedComp_jots.filter((eachJot) => {return eachJot !== jot
+      })
+
+      fetch(`${jotsURL}/${jot.id}`, {
+        method: "DELETE"
+      })
+      .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          selectedComp_jots: newSelectedComp_jots
+        })
+      })
+    }
+
+    /* ----------------- */
+
+    /* ----------------- */
+
  
   render(){
     return (
@@ -308,7 +328,7 @@ class App extends React.Component {
         {/* Composition Container */}
         <Route exact path='/compositions' render={ (routerProps) => (<CompositionContainer {...routerProps} allComps={this.state.compositions} showOneComp={this.showOneComp} fetchDeleteComp={this.fetchDeleteComp}/>)}/>
         {/* Single Composition */}
-        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} compJots={this.state.selectedComp_jots}/> )}/>
+        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} compJots={this.state.selectedComp_jots} deleteJot={this.deleteJot}/> )}/>
         {/* New Composition */}
         <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp}/>)} />
         {/* New Song Reference */}

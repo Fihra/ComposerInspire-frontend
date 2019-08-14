@@ -58,7 +58,7 @@ class SingleComposition extends React.Component {
 
     showJots = (jots) => {
         return jots.map((jot, i) => {
-            return <JotCard key={i} jot={jot}/>
+            return <JotCard key={i} jot={jot} deleteJot={this.props.deleteJot}/>
         })
     }
 

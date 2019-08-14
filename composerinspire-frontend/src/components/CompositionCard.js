@@ -9,10 +9,11 @@ class CompositionCard extends React.Component {
     }
 
     handleDeleteBtnClick = (selectedComp) => {
-        //TODO: ALERT USER BEFORE THEY ARE ABOUT TO DELETE THEIR COMPOSITION
-        // window.confirm("Are you sure you want to delete this composition?")
-        // console.log("Selected Comp to Delete: ", selectedComp)
-        this.props.fetchDeleteComp(selectedComp)
+        const choice = window.confirm("Are you sure you want to delete this composition?")
+        if(choice === true){
+            this.props.fetchDeleteComp(selectedComp)
+        }
+        
     }
 
     render(){

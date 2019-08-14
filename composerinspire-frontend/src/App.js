@@ -66,10 +66,12 @@ class App extends React.Component {
 
   /* Show One Composition */
   showOneComp = (comp) => {
+    let compRefs = comp.songreferences ? comp.songreferences : []
+    let compScales = comp.scales ? comp.scales : []
     this.setState({
       selectedComp: comp,
-      selectedComp_refs: comp.songreferences,
-      selectedComp_scales: comp.scales
+      selectedComp_refs: compRefs,
+      selectedComp_scales: compScales
     })  
   }
   /*-------------------- */

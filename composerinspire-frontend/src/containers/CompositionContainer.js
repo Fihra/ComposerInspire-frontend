@@ -1,26 +1,22 @@
 import React from 'react';
 import CompositionCard from '../components/CompositionCard';
-import { Button } from 'semantic-ui-react';
+import { Button, Grid } from 'semantic-ui-react';
 
-class Composition extends React.Component {
+class CompositionContainer extends React.Component {
     
-    // componentDidMount(){
-    //     this.state = {
-    //         show: false
-    //     }
-    // }
+    // allCompositions = () => {
+    //     return this.props.allComps.map((comp, i) => {
+    //         return <CompositionCard key={i} comp={comp} showOneComp={this.props.showOneComp} fetchDeleteComp={this.props.fetchDeleteComp} />
+    //     })
+    // } 
 
     allCompositions = () => {
-        return this.props.allComps.map((comp, i) => {
-            return <CompositionCard key={i} comp={comp} showOneComp={this.props.showOneComp} fetchDeleteComp={this.props.fetchDeleteComp} />
-        })
+        return <Grid columns={3} divided>
+            {this.props.allComps.map((comp, i) => (
+              <Grid.Column width={5}><CompositionCard key={i} comp={comp} showOneComp={this.props.showOneComp} fetchDeleteComp={this.props.fetchDeleteComp} /></Grid.Column>
+        ))}
+        </Grid>
     } 
-
-    // showNewForm = () => {
-    //     this.setState({
-    //         show: true
-    //     })
-    // }
 
     newCompPath = (path) => {
         this.props.history.push(path);
@@ -35,19 +31,12 @@ class Composition extends React.Component {
         
         return(
             <div>
-                <h2>My Compositions</h2>
+                <h2>🎼 My Compositions<div>{this.addButton()}</div></h2>
                 {this.allCompositions()}
-                <div>
-                    {this.addButton()}
-                    {/* <button onClick={()=> this.newCompPath('/newcomposition')}>[+] Add New Composition</button> */}
-                    {/* <Link to="/newcomposition">[+] Add New Composition</Link> */}
-
-
-                    {/* {this.state.show && <NewComposition />} */}
-                </div>
+    
             </div>
         )
     }
 }
 
-export default Composition;
+export default CompositionContainer;

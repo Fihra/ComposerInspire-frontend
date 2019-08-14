@@ -1,6 +1,7 @@
 import React from 'react';
 import SongreferenceCard from './SongreferenceCard';
 import ScaleCard from './ScaleCard';
+import { Container, Divider, Grid, Segment } from 'semantic-ui-react';
 
 class SingleComposition extends React.Component {
     state = {
@@ -54,27 +55,61 @@ class SingleComposition extends React.Component {
     }
     /* ---------------- */
 
-    render(){
+    // render(){
+    //     const {title} = this.props.comp
+
+    //     return(
+    //         <div>
+    //             <button onClick={this.goingBack}>Back to Compositions</button>
+    //             <h3>{title} <button onClick={this.handleEditClick}>Edit</button></h3>
+    //             {!this.state.done && (
+    //             <form className={this.state.class} onSubmit={(e) => this.handleSubmit(e)}>
+    //                 <input name="formTitleName" type="text" value={this.props.formTitleName} onChange={this.props.handleTitleInput}></input>
+    //                 <input type="submit" value="Submit"/>
+    //             </form>
+    //             )}
+    //             <p>More Info goes here</p>
+    //             <h4>Song References<button onClick={(e) => this.handleSongRefClick(e)}>+</button></h4>
+    //             {this.props.compRefs ? this.showSongReferences(this.props.compRefs): <div></div>}
+    //             <h4>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}>+</button></h4>
+    //             {this.props.compScales ? this.showScales(this.props.compScales): <div></div>}
+    //         </div>
+    //     )
+    // }
+       render(){
         const {title} = this.props.comp
 
         return(
             <div>
-                <button onClick={this.goingBack}>Back to Compositions</button>
-                <h3>{title} <button onClick={this.handleEditClick}>Edit</button></h3>
-                {!this.state.done && (
-                <form className={this.state.class} onSubmit={(e) => this.handleSubmit(e)}>
-                    <input name="formTitleName" type="text" value={this.props.formTitleName} onChange={this.props.handleTitleInput}></input>
-                    <input type="submit" value="Submit"/>
-                </form>
-                )}
-                <p>More Info goes here</p>
-                <h4>Song References<button onClick={(e) => this.handleSongRefClick(e)}>+</button></h4>
-                {this.props.compRefs ? this.showSongReferences(this.props.compRefs): <div></div>}
-                <h4>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}>+</button></h4>
-                {this.props.compScales ? this.showScales(this.props.compScales): <div></div>}
+                {/* <button onClick={this.goingBack}>Back to Compositions</button> */}
+            <Segment>
+                <Grid columns={3} relaxed='very'>
+                    <Grid.Column>
+                    <h3>{title} <button onClick={this.handleEditClick}>Edit</button></h3>
+                    {!this.state.done && (
+                    <form className={this.state.class} onSubmit={(e) => this.handleSubmit(e)}>
+                        <input name="formTitleName" type="text" value={this.props.formTitleName} onChange={this.props.handleTitleInput}></input>
+                        <input type="submit" value="Submit"/>
+                    </form>)}
+                    <p>More Info goes here</p>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                        <h4>Song References<button onClick={(e) => this.handleSongRefClick(e)}>+</button></h4>
+                        {this.props.compRefs ? this.showSongReferences(this.props.compRefs): <div></div>}
+                    </Grid.Column>
+                
+                    <Grid.Column>        
+                        <h4>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}>+</button></h4>
+                        {this.props.compScales ? this.showScales(this.props.compScales): <div></div>}
+                    </Grid.Column>
+                </Grid>
+                {/* <Divider vertical></Divider> */}
+            </Segment>
             </div>
         )
     }
+    
 }
 
 export default SingleComposition;

@@ -7,7 +7,6 @@ class NewComposition extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e)
         this.props.submitNewComp(e)
         this.props.history.push('/compositions')
     }

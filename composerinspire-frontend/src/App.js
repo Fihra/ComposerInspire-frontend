@@ -71,6 +71,7 @@ class App extends React.Component {
 
   /* Show One Composition */
   showOneComp = (comp) => {
+    // console.log(comp.jots.length)
     let compRefs = comp.songreferences ? comp.songreferences : []
     let compScales = comp.scales ? comp.scales : []
     let compJots = comp.jots ? comp.jots : []
@@ -189,6 +190,7 @@ class App extends React.Component {
         this.setState({
           selectedComp_refs: [...this.state.selectedComp_refs, json]
         })
+       this.fetchCompositions(); //////HEREREEEEEEE
       })
       
     }
@@ -237,8 +239,9 @@ class App extends React.Component {
       .then(resp => resp.json())
       .then(json => {
         this.setState({
-          selectedComp_scales: [...this.state.selectedComp_scales, json]
+          selectedComp_scales: [...this.state.selectedComp_scales, json],
         })
+       this.fetchCompositions(); //////HEREREEEEEEE 
       })
     }
 
@@ -284,7 +287,8 @@ class App extends React.Component {
       .then(json => {
         this.setState({
           selectedComp_jots: [...this.state.selectedComp_jots, json]
-        })
+        });
+        this.fetchCompositions(); //////HEREREEEEEEE
       })
     }
 

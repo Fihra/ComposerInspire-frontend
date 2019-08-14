@@ -9,11 +9,13 @@ import SingleComposition from './components/SingleComposition';
 import NewComposition from './NewForms/NewComposition';
 import NewSongRef from './NewForms/NewSongRef';
 import NewScale from './NewForms/NewScale';
+import NewJot from './NewForms/NewJot';
 
 
 const compositionsURL = "http://localhost:3000/compositions"
 const songreferencesURL = "http://localhost:3000/songreferences"
 const scalesURL = "http://localhost:3000/scales"
+const jotsURL = "http://localhost:3000/jots"
 
 class App extends React.Component {
   
@@ -26,10 +28,10 @@ class App extends React.Component {
       /* One Composition */
       selectedComp: [],
 
-      /*TODO: Song References State based on selectedComp */
+      /* selectedComp to Rerender */
       selectedComp_refs: [],
-
       selectedComp_scales: [],
+      selectedComp_jots: [],
 
       /* New Composition State */
       newTitleForm: "",
@@ -43,8 +45,11 @@ class App extends React.Component {
       newArtist: "",
       newYoutubeURL: "",
 
-      newScale: ""
+      /* New Scale State */
+      newScale: "",
 
+      /* New Jot State */
+      newJot: ""
     }
   }
 
@@ -68,10 +73,12 @@ class App extends React.Component {
   showOneComp = (comp) => {
     let compRefs = comp.songreferences ? comp.songreferences : []
     let compScales = comp.scales ? comp.scales : []
+    let compJots = comp.jots ? comp.jots : []
     this.setState({
       selectedComp: comp,
       selectedComp_refs: compRefs,
-      selectedComp_scales: compScales
+      selectedComp_scales: compScales,
+      selectedComp_jots: compJots
     })  
   }
   /*-------------------- */
@@ -205,7 +212,7 @@ class App extends React.Component {
         })
       })
     }
-    //Pass the function to the SongreferenceCard Component
+
    /* --------------------- */
 
     /* New Scale */
@@ -253,6 +260,34 @@ class App extends React.Component {
 
     /* ----------------- */
 
+    handleNewJotInput = (event) => {
+        event.persist();
+        this.setState({
+          [event.target.name]: event.target.value
+        })
+      
+    }
+
+    submitJot = () => {
+      fetch(jotsURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accepts": "application/json"
+        },
+        body: JSON.stringify({
+          content: this.state.newJot,
+          composition_id: this.state.selectedComp.id
+        })
+      })
+      .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          selectedComp_jots: [...this.state.selectedComp_jots, json]
+        })
+      })
+    }
+
  
   render(){
     return (
@@ -269,13 +304,16 @@ class App extends React.Component {
         {/* Composition Container */}
         <Route exact path='/compositions' render={ (routerProps) => (<CompositionContainer {...routerProps} allComps={this.state.compositions} showOneComp={this.showOneComp} fetchDeleteComp={this.fetchDeleteComp}/>)}/>
         {/* Single Composition */}
-        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} /> )}/>
+        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} compJots={this.state.selectedComp_jots}/> )}/>
         {/* New Composition */}
         <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp}/>)} />
         {/* New Song Reference */}
         <Route exact path='/compositions/:id/newsongreference' render={(routerProps) => (<NewSongRef {...routerProps} handleNewSongRefInput={this.handleNewSongRefInput} submitNewSongRef={this.submitNewSongRef} selectedComp={this.state.selectedComp} />)} />
         {/* New Scale */}
         <Route exact path='/compositions/:id/newscale' render={(routerProps) => (<NewScale {...routerProps} selectedComp={this.state.selectedComp} handleNewScaleChoice={this.handleNewScaleChoice} submitScale={this.submitScale}/>)}/>
+        {/* New Jot */}
+        <Route exact path='/compositions/:id/newjot' render={(routerProps) => (<NewJot {...routerProps} selectedComp={this.state.selectedComp} handleNewJotInput={this.handleNewJotInput} submitJot={this.submitJot}/>)}/>
+
         </div>
       </Router> 
     )

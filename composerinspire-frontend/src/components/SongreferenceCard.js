@@ -13,8 +13,9 @@ const SongreferenceCard = (props) => {
         const {song_title, artist, youtube_url} = props.song;
         return(
             <div>
-                {`${artist}: ${song_title}`}<button onClick={() => handleDeleteClick()}>-</button>
+                {`${artist}: ${song_title}`}
                 {embedYoutubeURL(youtube_url)}
+                <button onClick={() => handleDeleteClick()}>-</button>
             </div>
         )
 }

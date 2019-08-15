@@ -11,7 +11,6 @@ import NewSongRef from './NewForms/NewSongRef';
 import NewScale from './NewForms/NewScale';
 import NewJot from './NewForms/NewJot';
 
-
 const compositionsURL = "http://localhost:3000/compositions"
 const songreferencesURL = "http://localhost:3000/songreferences"
 const scalesURL = "http://localhost:3000/scales"
@@ -71,7 +70,6 @@ class App extends React.Component {
 
   /* Show One Composition */
   showOneComp = (comp) => {
-    // console.log(comp.jots.length)
     let compRefs = comp.songreferences ? comp.songreferences : []
     let compScales = comp.scales ? comp.scales : []
     let compJots = comp.jots ? comp.jots : []
@@ -314,6 +312,8 @@ class App extends React.Component {
 
  
   render(){
+    const { compositions } = this.state
+
     return (
      
       <Router>
@@ -326,7 +326,7 @@ class App extends React.Component {
         {/* Login */}
         <Route exact path='/login' component={Login} />
         {/* Composition Container */}
-        <Route exact path='/compositions' render={ (routerProps) => (<CompositionContainer {...routerProps} allComps={this.state.compositions} showOneComp={this.showOneComp} fetchDeleteComp={this.fetchDeleteComp}/>)}/>
+        <Route exact path='/compositions' render={ (routerProps) => (<CompositionContainer {...routerProps} allComps={compositions} showOneComp={this.showOneComp} fetchDeleteComp={this.fetchDeleteComp}/>)}/>
         {/* Single Composition */}
         <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} compJots={this.state.selectedComp_jots} deleteJot={this.deleteJot}/> )}/>
         {/* New Composition */}

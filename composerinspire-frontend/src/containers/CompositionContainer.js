@@ -1,38 +1,28 @@
 import React from 'react';
-import CompositionCard from '../components/CompositionCard';
+import CompositionCard from './CompositionCard';
 import { Button, Grid } from 'semantic-ui-react';
 
 class CompositionContainer extends React.Component {
-    
-    // allCompositions = () => {
-    //     return this.props.allComps.map((comp, i) => {
-    //         return <CompositionCard key={i} comp={comp} showOneComp={this.props.showOneComp} fetchDeleteComp={this.props.fetchDeleteComp} />
-    //     })
-    // } 
-
-    allCompositions = () => {
+    allCompositions = (allComps) => {
         return <Grid columns={3} divided>
-            {this.props.allComps.map((comp, i) => (
-              <Grid.Column width={5}><CompositionCard key={i} comp={comp} showOneComp={this.props.showOneComp} fetchDeleteComp={this.props.fetchDeleteComp} /></Grid.Column>
+            {allComps.map((comp, i) => (
+              <Grid.Column key={i} width={5}><CompositionCard key={i} comp={comp} showOneComp={this.props.showOneComp} fetchDeleteComp={this.props.fetchDeleteComp} /></Grid.Column>
         ))}
         </Grid>
     } 
-
-    newCompPath = (path) => {
-        this.props.history.push(path);
-    }
-
+  /*-------------------- */
     /*Add New Composition Button */
     addButton = () => {
-        return <Button onClick={()=> this.newCompPath('/newcomposition')}>[+] Add New Composition</Button>
+        return <Button onClick={()=> this.props.history.push('/newcomposition')}>[+] Add New Composition</Button>
     }
 
     render(){
+        const { allComps } = this.props
         
         return(
             <div>
-                <h2>🎼 My Compositions<div>{this.addButton()}</div></h2>
-                {this.allCompositions()}
+                <h2><span role="img">🎼</span> My Compositions<div>{this.addButton()}</div></h2>
+                {this.allCompositions(allComps)}
     
             </div>
         )

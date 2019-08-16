@@ -10,6 +10,7 @@ import NewComposition from './NewForms/NewComposition';
 import NewSongRef from './NewForms/NewSongRef';
 import NewScale from './NewForms/NewScale';
 import NewJot from './NewForms/NewJot';
+import AddInstrument from './NewForms/AddInstrument';
 
 
 const compositionsURL = "http://localhost:3000/compositions"
@@ -32,6 +33,7 @@ class App extends React.Component {
       selectedComp_refs: [],
       selectedComp_scales: [],
       selectedComp_jots: [],
+      selectedComp_instruments: [],
 
       /* New Composition State */
       newTitleForm: "",
@@ -49,7 +51,13 @@ class App extends React.Component {
       newScale: "",
 
       /* New Jot State */
-      newJot: ""
+      newJot: "",
+
+      /* Selecting Instruments Form */
+      instrumentsSelected: []
+      
+      /*-------------------------- */
+
     }
   }
 
@@ -309,6 +317,11 @@ class App extends React.Component {
     }
 
     /* ----------------- */
+    /* - AddInstuments - */
+    handleAddingInstruments = (instruments) => {
+      console.log(instruments);
+    }
+
 
     /* ----------------- */
 
@@ -337,6 +350,8 @@ class App extends React.Component {
         <Route exact path='/compositions/:id/newscale' render={(routerProps) => (<NewScale {...routerProps} selectedComp={this.state.selectedComp} handleNewScaleChoice={this.handleNewScaleChoice} submitScale={this.submitScale}/>)}/>
         {/* New Jot */}
         <Route exact path='/compositions/:id/newjot' render={(routerProps) => (<NewJot {...routerProps} selectedComp={this.state.selectedComp} handleNewJotInput={this.handleNewJotInput} submitJot={this.submitJot}/>)}/>
+        {/* Add Instrument */}
+        <Route exact path='/addinstrument' render={(routerProps) => (<AddInstrument {...routerProps} allComps={this.state.compositions} handleAddingInstruments={this.state.handleAddingInstruments}/>)}/>
 
         </div>
       </Router> 

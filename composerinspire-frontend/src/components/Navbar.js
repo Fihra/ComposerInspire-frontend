@@ -13,6 +13,7 @@ const Navbar = (props) => {
         <Menu>
             <Menu.Item as={ Link } name='home' to='/'>Home</Menu.Item>
             <Menu.Item as={ Link } name='compositions' to='/compositions'>Compositions</Menu.Item>
+            <Menu.Item as={ Link } name='add-instrument' to='/addinstrument'>Add Instrument</Menu.Item>
             {/* <Menu.Item onClick={() => props.history.push('/')}>Home</Menu.Item>
             <Menu.Item onClick={() => props.history.push('/compositions')}>Compositions</Menu.Item> */}
 

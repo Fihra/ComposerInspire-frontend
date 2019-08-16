@@ -3,12 +3,6 @@ import CompositionCard from '../components/CompositionCard';
 import { Button, Grid } from 'semantic-ui-react';
 
 class CompositionContainer extends React.Component {
-    
-    // allCompositions = () => {
-    //     return this.props.allComps.map((comp, i) => {
-    //         return <CompositionCard key={i} comp={comp} showOneComp={this.props.showOneComp} fetchDeleteComp={this.props.fetchDeleteComp} />
-    //     })
-    // } 
 
     allCompositions = () => {
         return <Grid columns={3} divided>

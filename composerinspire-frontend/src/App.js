@@ -69,17 +69,24 @@ class App extends React.Component {
     this.fetchCompositions()
   }
 
+  componentDidUpdate(prevProps, prevState){
+    console.log("PrevProps: ", prevProps);
+    console.log("prevState: ", prevState);
+    
+    //this.fetchCompositions();
+  }
+
   /* Show One Composition */
   showOneComp = (comp) => {
-    // console.log(comp.jots.length)
-    let compRefs = comp.songreferences ? comp.songreferences : []
-    let compScales = comp.scales ? comp.scales : []
-    let compJots = comp.jots ? comp.jots : []
+    
+    // let compRefs = comp.songreferences ? comp.songreferences : []
+    // let compScales = comp.scales ? comp.scales : []
+    // let compJots = comp.jots ? comp.jots : []
     this.setState({
       selectedComp: comp,
-      selectedComp_refs: compRefs,
-      selectedComp_scales: compScales,
-      selectedComp_jots: compJots
+      // selectedComp_refs: compRefs,
+      // selectedComp_scales: compScales,
+      // selectedComp_jots: compJots
     })  
   }
   /*-------------------- */
@@ -328,7 +335,8 @@ class App extends React.Component {
         {/* Composition Container */}
         <Route exact path='/compositions' render={ (routerProps) => (<CompositionContainer {...routerProps} allComps={this.state.compositions} showOneComp={this.showOneComp} fetchDeleteComp={this.fetchDeleteComp}/>)}/>
         {/* Single Composition */}
-        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} compJots={this.state.selectedComp_jots} deleteJot={this.deleteJot}/> )}/>
+        {/* <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} compJots={this.state.selectedComp_jots} deleteJot={this.deleteJot}/> )}/> */}
+        <Route exact path='/compositions/:id' render={(routerProps) => <SingleComposition {...routerProps} comp={this.state.selectedComp}/>}/>
         {/* New Composition */}
         <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp}/>)} />
         {/* New Song Reference */}

@@ -11,7 +11,7 @@ class SingleComposition extends React.Component {
     }
 
     goingBack = () =>{
-        this.props.history.push("/compositions/");
+        this.props.history.push("/compositions");
     }
 
     handleEditClick = () => {
@@ -28,6 +28,9 @@ class SingleComposition extends React.Component {
     
     handleSubmit = (event) => {
         event.preventDefault();
+        this.setState({
+            done: true
+        })
         this.props.updateTitle(this.props.comp)
         this.props.history.goBack();
         // this.props.history.push(`/compositions/${this.props.comp.id}`)
@@ -67,7 +70,7 @@ class SingleComposition extends React.Component {
     }
 
        render(){
-        const {title} = this.props.comp
+        const {title, jots, songreferences, scales} = this.props.comp
 
         return(
             <div>
@@ -81,17 +84,17 @@ class SingleComposition extends React.Component {
                         <input type="submit" value="Submit"/>
                     </form>)}
                     <button onClick={(e) => this.handleJotClick(e)}>Quick Jot</button>
-                        {this.props.comp.jots ? this.showJots(this.props.compJots) : <div></div>}
+                        {jots ? this.showJots(jots) : <div></div>}
                     </Grid.Column>
 
                     <Grid.Column>
                         <h4>Song References<button onClick={(e) => this.handleSongRefClick(e)}>+</button></h4>
-                        {this.props.compRefs ? this.showSongReferences(this.props.compRefs): <div></div>}
+                        {songreferences ? this.showSongReferences(songreferences): <div></div>}
                     </Grid.Column>
                 
                     <Grid.Column>        
                         <h4>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}>+</button></h4>
-                        {this.props.compScales ? this.showScales(this.props.compScales): <div></div>}
+                        {scales ? this.showScales(scales): <div></div>}
                     </Grid.Column>
                 </Grid>
                 {/* <Divider vertical></Divider> */}

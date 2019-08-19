@@ -12,8 +12,23 @@ class IdiophonesSelection extends Component {
             }
         })
     }
-    handleChange = (event) =>{
-        console.log(event)
+    handleChange = (event, data) =>{
+        event.persist();
+        // let savedIdiophones = [];
+        let idios = "Idiophones";
+
+        // if(event.target.className === 'delete icon' && savedIdiophones.includes(data.value)) {
+        //     return savedIdiophones.filter((selected) => {
+        //         return selected !== data.value
+        //     })
+        // }
+
+        // else {
+        //     savedIdiophones.push(data.value);
+        // }
+        
+        this.props.updateInstruments(event, data, idios);
+
     }
     render(){
         return(

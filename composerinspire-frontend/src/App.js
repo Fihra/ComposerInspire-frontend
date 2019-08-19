@@ -11,6 +11,7 @@ import NewSongRef from './NewForms/NewSongRef';
 import NewScale from './NewForms/NewScale';
 import NewJot from './NewForms/NewJot';
 import AddInstrument from './NewForms/AddInstrument';
+import { bigIntLiteral } from '@babel/types';
 
 
 const compositionsURL = "http://localhost:3000/compositions"
@@ -54,11 +55,16 @@ class App extends React.Component {
       newJot: "",
 
       /* Selecting Instruments Form */
-      instrumentsSelected: []
+        savedAerophones: [],
+        savedChordophones: [],
+        savedElectrophones: [],
+        savedIdiophones: [],
+        savedMembranophones: []
+      }
       
       /*-------------------------- */
 
-    }
+    
   }
 
   /* Fetch all compositions*/
@@ -83,11 +89,13 @@ class App extends React.Component {
     let compRefs = comp.songreferences ? comp.songreferences : []
     let compScales = comp.scales ? comp.scales : []
     let compJots = comp.jots ? comp.jots : []
+    let compInstruments = comp.instruments ? comp.instruments : []
     this.setState({
       selectedComp: comp,
       selectedComp_refs: compRefs,
       selectedComp_scales: compScales,
-      selectedComp_jots: compJots
+      selectedComp_jots: compJots,
+      selectedComp_instruments: compInstruments
     })  
   }
   /*-------------------- */
@@ -318,8 +326,114 @@ class App extends React.Component {
 
     /* ----------------- */
     /* - AddInstuments - */
-    handleAddingInstruments = (instruments) => {
-      console.log(instruments);
+    updateInstruments = (event, data, instrumentType) =>{
+      console.log(data.value);
+      console.log(instrumentType);
+      switch(instrumentType){
+        case "Aerophones":
+          if(event.target.className === 'delete icon'){
+            console.log("Deleting")
+            this.setState({
+              savedAerophones: [...data.value]
+            })
+          }
+          else {
+            this.setState({
+              savedAerophones: [...data.value]
+            })
+          }
+          break;
+        case "Idiophones":
+          console.log("Adding Idiophones");
+          if(event.target.className === 'delete icon'){
+            console.log("Deleting")
+            this.setState({
+              savedIdiophones: [...data.value]
+            })
+          }
+          else {
+            this.setState({
+              savedIdiophones: [...data.value]
+            })
+          }
+          break;
+        case "Membranophones":
+          console.log("Adding Membranophones");
+          if(event.target.className === 'delete icon'){
+            console.log("Deleting")
+            this.setState({
+              savedMembranophones: [...data.value]
+            })
+          }
+          else {
+            this.setState({
+              savedMembranophones: [...data.value]
+            })
+          }
+          break;
+        case "Chordophones":
+          console.log("Adding Chordophones");
+          if(event.target.className === 'delete icon'){
+            console.log("Deleting")
+            this.setState({
+              savedChordophones: [...data.value]
+            })
+          }
+          else {
+            this.setState({
+              savedChordophones: [...data.value]
+            })
+          }
+          break;
+        case "Electrophones":
+          console.log("Adding Electrophones");
+          if(event.target.className === 'delete icon'){
+            console.log("Deleting")
+            this.setState({
+              savedElectrophones: [...data.value]
+            })
+          }
+          else {
+            this.setState({
+              savedElectrophones: [...data.value]
+            })
+          }
+          break;
+        default:
+          console.log("No addition");
+      }
+    }
+
+
+    updatess = (event, data, aeros) => {
+      // console.log(event);
+      let filteredAerophones
+      console.log(data.value);
+      // if(event.target.className === 'delete icon' && this.state.savedAerophones.includes(data.value)) {
+      //       filteredAerophones = this.state.savedAerophones.filter((selected) => {
+      //           return selected !== data.value
+      //     })
+      //     this.setState({
+      //       savedAerophones: filteredAerophones
+      //     })
+      // }
+
+      this.setState({
+        savedAerophones: [data.value]
+      })
+    }
+
+
+ 
+    selectCompForInstruments = (compInstrumentForm) => {
+      // console.log(selectedComp)
+      this.setState({
+          selectedComp: compInstrumentForm
+      })
+    }
+
+    submitInstruments = () => {
+        
     }
 
 
@@ -341,7 +455,7 @@ class App extends React.Component {
         {/* Composition Container */}
         <Route exact path='/compositions' render={ (routerProps) => (<CompositionContainer {...routerProps} allComps={this.state.compositions} showOneComp={this.showOneComp} fetchDeleteComp={this.fetchDeleteComp}/>)}/>
         {/* Single Composition */}
-        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} compJots={this.state.selectedComp_jots} deleteJot={this.deleteJot}/> )}/>
+        <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} compJots={this.state.selectedComp_jots} deleteJot={this.deleteJot} compInstruments={this.state.selectedComp_instruments}/> )}/>
         {/* New Composition */}
         <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp}/>)} />
         {/* New Song Reference */}
@@ -351,7 +465,7 @@ class App extends React.Component {
         {/* New Jot */}
         <Route exact path='/compositions/:id/newjot' render={(routerProps) => (<NewJot {...routerProps} selectedComp={this.state.selectedComp} handleNewJotInput={this.handleNewJotInput} submitJot={this.submitJot}/>)}/>
         {/* Add Instrument */}
-        <Route exact path='/addinstrument' render={(routerProps) => (<AddInstrument {...routerProps} allComps={this.state.compositions} handleAddingInstruments={this.state.handleAddingInstruments}/>)}/>
+        <Route exact path='/addinstrument' render={(routerProps) => (<AddInstrument {...routerProps} allComps={this.state.compositions}  updateInstruments={this.updateInstruments} selectCompForInstruments={this.selectCompForInstruments} submitInstruments={this.submitInstruments} updateInstruments={this.updateInstruments}/>)}/>
 
         </div>
       </Router> 

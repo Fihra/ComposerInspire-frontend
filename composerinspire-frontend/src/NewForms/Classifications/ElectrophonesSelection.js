@@ -13,8 +13,11 @@ class ElectrophonesSelection extends Component {
         })
     }
 
-    handleChange = (event) =>{
-        console.log(event)
+    handleChange = (event, data) =>{
+        event.persist();
+        let electros = "Electrophones";
+
+        this.props.updateInstruments(event, data, electros)
     }
     render(){
         return(

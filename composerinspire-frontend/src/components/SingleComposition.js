@@ -2,6 +2,7 @@ import React from 'react';
 import SongreferenceCard from './SongreferenceCard';
 import ScaleCard from './ScaleCard';
 import JotCard from './JotCard';
+import InstrumentCard from './InstrumentCard';
 import { Container, Divider, Grid, Segment } from 'semantic-ui-react';
 
 class SingleComposition extends React.Component {
@@ -66,6 +67,15 @@ class SingleComposition extends React.Component {
         this.props.history.push(`/compositions/${this.props.comp.id}/newjot`)
     }
 
+    /* Instruments Functions */
+    showInstruments = (instruments) => {
+        return instruments.map((instrument, i) => {
+            return <InstrumentCard key={i} instrument={instrument}/>
+        })
+    }
+
+    /* --------------------- */
+
        render(){
         const {title} = this.props.comp
 
@@ -92,6 +102,11 @@ class SingleComposition extends React.Component {
                     <Grid.Column>        
                         <h4>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}>+</button></h4>
                         {this.props.compScales ? this.showScales(this.props.compScales): <div></div>}
+                    </Grid.Column>
+
+                    <Grid.Column>        
+                        <h4>Saved Instruments</h4>
+                        {this.props.compInstruments ? this.showInstruments(this.props.compInstruments): <div></div>}
                     </Grid.Column>
                 </Grid>
                 {/* <Divider vertical></Divider> */}

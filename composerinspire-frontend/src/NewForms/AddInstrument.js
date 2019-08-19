@@ -18,41 +18,48 @@ class AddInstrument extends React.Component{
         })
     }
 
-    hanldeCompChoice = (event, data) => {
-        console.log(data)
+    handleCompChoice = (event, data) => {
+        console.log(data.value)
+        this.props.selectCompForInstruments(data.value) 
+
     }
-    
+
+    handleSubmit = () => {
+        console.log("Submitting all these instruments")
+    }
     render(){
         return(
             <div>
                 <h1>Add Instrument</h1>
-                <Form >
+                <Form onSubmit={this.handleSubmit}>
                     <Form.Dropdown
                         placeholder='Select Composition'
                         fluid search selection
                         onChange={this.handleCompChoice}
                         options={this.showAllCompositions()}
                     />
-                </Form>
+                
                 <Segment>
                     <Grid columns={5}>
                         <Grid.Column>
-                            <AerophonesSelection />
+                            <AerophonesSelection updateAerophones={this.props.updateAerophones} updateInstruments={this.props.updateInstruments}/>
                         </Grid.Column>
                         <Grid.Column>
-                            <ChordophonesSelection />
+                            <ChordophonesSelection updateChordophones={this.props.updateChordophones} updateInstruments={this.props.updateInstruments}/>
                         </Grid.Column>
                         <Grid.Column>
-                            <ElectrophonesSelection />
+                            <ElectrophonesSelection updateElectrophones={this.props.updateElectrophones} updateInstruments={this.props.updateInstruments}/>
                         </Grid.Column>
                         <Grid.Column>
-                            <IdiophonesSelection />
+                            <IdiophonesSelection updateIdiophones={this.props.updateIdiophones} updateInstruments={this.props.updateInstruments}/>
                         </Grid.Column>
                         <Grid.Column>
-                            <MembranophonesSelection />
+                            <MembranophonesSelection updateMembranophones={this.props.updateMembranophones} updateInstruments={this.props.updateInstruments}/>
                         </Grid.Column>
                     </Grid>
                 </Segment>
+                <Button type="submit">Submit</Button> 
+                </Form>
             </div>
         )
     }

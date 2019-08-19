@@ -13,8 +13,22 @@ class ChordophonesSelection extends Component {
         })
     }
 
-    handleChange = (event) =>{
-        console.log(event)
+    handleChange = (event, data) =>{
+        event.persist();
+        // let savedChordophones = [];
+
+        // if(event.target.className === 'delete icon' && savedChordophones.includes(data.value)) {
+        //     return savedChordophones.filter((selected) => {
+        //         return selected !== data.value
+        //     })
+        // }
+
+        // else {
+        //     savedChordophones.push(data.value);
+        // }
+        let chordos = "Chordophones";
+        this.props.updateInstruments(event, data, chordos)
+
     }
     render(){
         return(

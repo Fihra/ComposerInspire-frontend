@@ -13,8 +13,12 @@ class MembranophonesSelection extends Component {
         })
     }
 
-    handleChange = (event) =>{
-        console.log(event)
+    handleChange = (event, data) =>{
+        event.persist();
+
+        let membranos = "Membranophones";
+        
+        this.props.updateInstruments(event, data, membranos);
     }
     render(){
         return(

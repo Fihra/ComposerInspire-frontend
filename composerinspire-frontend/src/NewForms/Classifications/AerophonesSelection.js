@@ -3,7 +3,6 @@ import { Aerophones } from '../../MusicData/InstrumentsData';
 import { Dropdown} from 'semantic-ui-react';
 
 class AerophonesSelection extends Component {
-    
     allAerophones = () => {
         return Object.keys(Aerophones).map((aero, i) => {
             return {
@@ -15,12 +14,15 @@ class AerophonesSelection extends Component {
         })
     }
 
-    handleChange = (event) =>{
-        console.log(event)
+    handleChange = (event, data) =>{
+        event.persist();
+        let aeros = "Aerophones";
+        
+        this.props.updateInstruments(event, data, aeros);
+
     }
 
     render(){
-    console.log(Aerophones)
         return(
             <div>
             <h3>Aerophones</h3>

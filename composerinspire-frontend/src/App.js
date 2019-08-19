@@ -18,6 +18,7 @@ const compositionsURL = "http://localhost:3000/compositions"
 const songreferencesURL = "http://localhost:3000/songreferences"
 const scalesURL = "http://localhost:3000/scales"
 const jotsURL = "http://localhost:3000/jots"
+const instrumentsURL = "http://localhost:3000/instruments"
 
 class App extends React.Component {
   
@@ -55,11 +56,13 @@ class App extends React.Component {
       newJot: "",
 
       /* Selecting Instruments Form */
+        selectedCompForAddingInstruments: null,
         savedAerophones: [],
         savedChordophones: [],
         savedElectrophones: [],
         savedIdiophones: [],
-        savedMembranophones: []
+        savedMembranophones: [],
+        savedAllInstruments: []
       }
       
       /*-------------------------- */
@@ -404,36 +407,69 @@ class App extends React.Component {
       }
     }
 
-
-    updatess = (event, data, aeros) => {
-      // console.log(event);
-      let filteredAerophones
-      console.log(data.value);
-      // if(event.target.className === 'delete icon' && this.state.savedAerophones.includes(data.value)) {
-      //       filteredAerophones = this.state.savedAerophones.filter((selected) => {
-      //           return selected !== data.value
-      //     })
-      //     this.setState({
-      //       savedAerophones: filteredAerophones
-      //     })
-      // }
-
-      this.setState({
-        savedAerophones: [data.value]
-      })
-    }
-
-
- 
     selectCompForInstruments = (compInstrumentForm) => {
       // console.log(selectedComp)
       this.setState({
-          selectedComp: compInstrumentForm
+        selectedCompForAddingInstruments: compInstrumentForm
       })
     }
 
     submitInstruments = () => {
+      if(this.state.selectedCompForAddingInstruments === null){
+        return window.confirm("No Composition selected");
+      }
+      else{
+        this.transferAllInstruments();
         
+      }
+    }
+
+    transferAllInstruments = () => {
+      console.log("Submitting all these instruments");
+      let compositionInstrumentArray = [];
+
+      let allSavedInstruments = [this.state.savedAerophones, this.state.savedChordophones, this.state.savedElectrophones, this.state.savedIdiophones, this.state.savedMembranophones]
+
+      for(let i=0; i < allSavedInstruments.length; i++){
+        for(let j=0; j < allSavedInstruments[i].length; j++){
+          compositionInstrumentArray.push(allSavedInstruments[i][j]);
+          // compositionInstrumentArray = [...compositionInstrumentArray, allSavedInstruments[i][j]]
+        }
+      }
+      // console.log("compositionInstrumentArray : ", compositionInstrumentArray)
+      this.setState({
+        savedAllInstruments: compositionInstrumentArray
+      }, () => this.addInstrumentsFetch())
+      // console.log("SavedALlInstruments State: ", this.state.savedAllInstruments)
+
+      // I need a way to go through each array of instrumentTypes
+      // to add each instrument to the compositions's array of instruments
+
+    }
+
+    addInstrumentsFetch = () => {
+      // console.log(this.state.selectedCompForAddingInstruments.id)
+      // console.log(this.state.savedAllInstruments)
+
+      Promise.all(this.state.savedAllInstruments.map(instrument => {
+        fetch(instrumentsURL, {
+          method: "POST",
+          headers: {
+            'Content-Type': "application/json",
+            "Accepts": "application/json"
+          },
+          body: JSON.stringify({
+            instrument_name: instrument,
+            composition_id: this.state.selectedCompForAddingInstruments.id
+          })
+        })
+        .then(resp => resp.json())
+        .then(json => console.log(json))
+      }))
+      .then(data => console.log(data))
+   
+
+      console.log("HERe I am now")
     }
 
 

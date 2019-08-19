@@ -19,13 +19,13 @@ class AddInstrument extends React.Component{
     }
 
     handleCompChoice = (event, data) => {
-        console.log(data.value)
+        // console.log(data.value)
         this.props.selectCompForInstruments(data.value) 
 
     }
 
     handleSubmit = () => {
-        console.log("Submitting all these instruments")
+        this.props.submitInstruments();
     }
     render(){
         return(

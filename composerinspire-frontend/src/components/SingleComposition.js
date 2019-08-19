@@ -3,7 +3,7 @@ import SongreferenceCard from './SongreferenceCard';
 import ScaleCard from './ScaleCard';
 import JotCard from './JotCard';
 import InstrumentCard from './InstrumentCard';
-import { Container, Divider, Grid, Segment } from 'semantic-ui-react';
+import { Grid, Segment } from 'semantic-ui-react';
 
 class SingleComposition extends React.Component {
     state = {

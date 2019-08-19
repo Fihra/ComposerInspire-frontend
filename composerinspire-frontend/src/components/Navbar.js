@@ -4,11 +4,6 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
 
 const Navbar = (props) => {
-    // console.log(props)
-    const goHome  = () => {
-
-    }
-
     return(
         <Menu>
             <Menu.Item as={ Link } name='home' to='/'>Home</Menu.Item>

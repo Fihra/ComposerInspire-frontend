@@ -11,7 +11,6 @@ import NewSongRef from './NewForms/NewSongRef';
 import NewScale from './NewForms/NewScale';
 import NewJot from './NewForms/NewJot';
 import AddInstrument from './NewForms/AddInstrument';
-import { bigIntLiteral } from '@babel/types';
 
 
 const compositionsURL = "http://localhost:3000/compositions"
@@ -330,12 +329,9 @@ class App extends React.Component {
     /* ----------------- */
     /* - AddInstuments - */
     updateInstruments = (event, data, instrumentType) =>{
-      console.log(data.value);
-      console.log(instrumentType);
       switch(instrumentType){
         case "Aerophones":
           if(event.target.className === 'delete icon'){
-            console.log("Deleting")
             this.setState({
               savedAerophones: [...data.value]
             })
@@ -347,9 +343,7 @@ class App extends React.Component {
           }
           break;
         case "Idiophones":
-          console.log("Adding Idiophones");
           if(event.target.className === 'delete icon'){
-            console.log("Deleting")
             this.setState({
               savedIdiophones: [...data.value]
             })
@@ -361,9 +355,7 @@ class App extends React.Component {
           }
           break;
         case "Membranophones":
-          console.log("Adding Membranophones");
           if(event.target.className === 'delete icon'){
-            console.log("Deleting")
             this.setState({
               savedMembranophones: [...data.value]
             })
@@ -375,9 +367,7 @@ class App extends React.Component {
           }
           break;
         case "Chordophones":
-          console.log("Adding Chordophones");
           if(event.target.className === 'delete icon'){
-            console.log("Deleting")
             this.setState({
               savedChordophones: [...data.value]
             })
@@ -389,9 +379,7 @@ class App extends React.Component {
           }
           break;
         case "Electrophones":
-          console.log("Adding Electrophones");
           if(event.target.className === 'delete icon'){
-            console.log("Deleting")
             this.setState({
               savedElectrophones: [...data.value]
             })
@@ -408,7 +396,6 @@ class App extends React.Component {
     }
 
     selectCompForInstruments = (compInstrumentForm) => {
-      // console.log(selectedComp)
       this.setState({
         selectedCompForAddingInstruments: compInstrumentForm
       })
@@ -420,12 +407,10 @@ class App extends React.Component {
       }
       else{
         this.transferAllInstruments();
-        
       }
     }
 
     transferAllInstruments = () => {
-      console.log("Submitting all these instruments");
       let compositionInstrumentArray = [];
 
       let allSavedInstruments = [this.state.savedAerophones, this.state.savedChordophones, this.state.savedElectrophones, this.state.savedIdiophones, this.state.savedMembranophones]
@@ -433,49 +418,29 @@ class App extends React.Component {
       for(let i=0; i < allSavedInstruments.length; i++){
         for(let j=0; j < allSavedInstruments[i].length; j++){
           compositionInstrumentArray.push(allSavedInstruments[i][j]);
-          // compositionInstrumentArray = [...compositionInstrumentArray, allSavedInstruments[i][j]]
         }
       }
-      // console.log("compositionInstrumentArray : ", compositionInstrumentArray)
       this.setState({
         savedAllInstruments: compositionInstrumentArray
       }, () => this.addInstrumentsFetch())
-      // console.log("SavedALlInstruments State: ", this.state.savedAllInstruments)
-
-      // I need a way to go through each array of instrumentTypes
-      // to add each instrument to the compositions's array of instruments
-
     }
 
     addInstrumentsFetch = () => {
-      // console.log(this.state.selectedCompForAddingInstruments.id)
-      // console.log(this.state.savedAllInstruments)
-
-      Promise.all(this.state.savedAllInstruments.map(instrument => {
-        fetch(instrumentsURL, {
-          method: "POST",
-          headers: {
-            'Content-Type': "application/json",
-            "Accepts": "application/json"
-          },
-          body: JSON.stringify({
-            instrument_name: instrument,
-            composition_id: this.state.selectedCompForAddingInstruments.id
+          fetch(instrumentsURL, {
+            method: "POST",
+            headers: {
+              'Content-Type': "application/json",
+              "Accepts": "application/json"
+            },
+            body: JSON.stringify({
+              instrument_name: this.state.savedAllInstruments.join(', '),
+              composition_id: this.state.selectedCompForAddingInstruments.id
+            })
           })
-        })
-        .then(resp => resp.json())
-        .then(json => console.log(json))
-      }))
-      .then(data => console.log(data))
-   
-
-      console.log("HERe I am now")
-    }
-
-
+          .then(resp => resp.json())
+          .then(json => console.log(json))
+  }
     /* ----------------- */
-
- 
   render(){
     return (
      
@@ -501,7 +466,7 @@ class App extends React.Component {
         {/* New Jot */}
         <Route exact path='/compositions/:id/newjot' render={(routerProps) => (<NewJot {...routerProps} selectedComp={this.state.selectedComp} handleNewJotInput={this.handleNewJotInput} submitJot={this.submitJot}/>)}/>
         {/* Add Instrument */}
-        <Route exact path='/addinstrument' render={(routerProps) => (<AddInstrument {...routerProps} allComps={this.state.compositions}  updateInstruments={this.updateInstruments} selectCompForInstruments={this.selectCompForInstruments} submitInstruments={this.submitInstruments} updateInstruments={this.updateInstruments}/>)}/>
+        <Route exact path='/addinstrument' render={(routerProps) => (<AddInstrument {...routerProps} allComps={this.state.compositions} selectCompForInstruments={this.selectCompForInstruments} submitInstruments={this.submitInstruments} updateInstruments={this.updateInstruments}/>)}/>
 
         </div>
       </Router> 

@@ -26,6 +26,7 @@ class AddInstrument extends React.Component{
 
     handleSubmit = () => {
         this.props.submitInstruments();
+        
     }
     render(){
         return(

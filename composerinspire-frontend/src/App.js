@@ -11,6 +11,7 @@ import NewSongRef from './NewForms/NewSongRef';
 import NewScale from './NewForms/NewScale';
 import NewJot from './NewForms/NewJot';
 import AddInstrument from './NewForms/AddInstrument';
+import InstrumentFormSubmitted from './components/InstrumentFormSubmitted';
 
 
 const compositionsURL = "http://localhost:3000/compositions"
@@ -467,6 +468,7 @@ class App extends React.Component {
         <Route exact path='/compositions/:id/newjot' render={(routerProps) => (<NewJot {...routerProps} selectedComp={this.state.selectedComp} handleNewJotInput={this.handleNewJotInput} submitJot={this.submitJot}/>)}/>
         {/* Add Instrument */}
         <Route exact path='/addinstrument' render={(routerProps) => (<AddInstrument {...routerProps} allComps={this.state.compositions} selectCompForInstruments={this.selectCompForInstruments} submitInstruments={this.submitInstruments} updateInstruments={this.updateInstruments}/>)}/>
+        <Route exact path='/instrumentssubmitted' render={(routerProps) => (<InstrumentFormSubmitted {...routerProps} /> )}/>
 
         </div>
       </Router> 

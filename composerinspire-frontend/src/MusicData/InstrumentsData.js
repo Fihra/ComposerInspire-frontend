@@ -1,9 +1,18 @@
 export const Idiophones = {
     'claves': "Claves",
+    'slapstick': "Slapstick",
     'castanets': "Castanets",
     'cymbals': "Cymbals",
     'xylophone': "Xylophone",
-    'glockenspiel': "Glockenspiel"
+    'glockenspiel': "Glockenspiel",
+    'triangle': "Triangle",
+    'marimba': "Marimba",
+    'celesta': "Celesta",
+    'vibraphone': "Vibraphone",
+    'tubular-bells': "Tubular Bells",
+    'steel-drum': "Steel Drum",
+    'wood-block': "Wood Block",
+    'cowbell': "Cowbell"
 }
 
 export const Membranophones = {
@@ -12,6 +21,7 @@ export const Membranophones = {
     'bass-drum': "Bass Drum",
     'tom-tom': "Tom Toms",
     'tambourine': "Tambourine",
+    'conga': "Conga"
 }
 
 export const Chordophones = {
@@ -28,7 +38,9 @@ export const Chordophones = {
 }
 
 export const Aerophones = {
+    'piccolo': "Piccolo",
     'flute': "Flute",
+    'ocarina': "Ocarina",
     'oboe': "Oboe",
     'bassoon': "Bassoon",
     'clarinet': "Clarinet",
@@ -36,7 +48,11 @@ export const Aerophones = {
     'soprano-sax': "Soprano Saxophone",
     'alto-sax': "Alto Saxophone",
     'tenor-sax': "Tenor Saxophone",
-    'baritone-sax': "Baritone Saxophone"
+    'baritone-sax': "Baritone Saxophone",
+    'trumpet': "Trumpet",
+    'horn': "Horn",
+    'trombone': "Trombone",
+    'tuba': "Tuba"
 }
 
 export const Electrophones = {

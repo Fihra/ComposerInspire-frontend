@@ -178,6 +178,7 @@ class App extends React.Component {
       this.fetchCompositions();
     })
     
+    
   }
   /*-------------------------- */
 
@@ -262,7 +263,8 @@ class App extends React.Component {
 
     submitScale = () => {
       // debugger
-      if(this.state.selectedComp.scales.some((scale) => {
+      if(this.state.selectedComp_scales.some((scale) => {
+        console.log(scale);
         return scale.scale_name === this.state.newScale
       })){
         window.alert("Scale already exists in this comp")

@@ -34,7 +34,7 @@ class SingleComposition extends React.Component {
             class: "hidden"
         })
         // this.props.history.goBack();
-        this.props.history.push(`/compositions/${this.props.comp.id}`)
+        // this.props.history.push(`/compositions/${this.props.comp.id}`)
     }
     /* Song Reference Functions */
     showSongReferences = (songRefs) => {
@@ -94,7 +94,7 @@ class SingleComposition extends React.Component {
                         <input type="submit" value="Submit"/>
                     </form>)}
                     <button onClick={(e) => this.handleJotClick(e)}>Quick Jot</button>
-                        {this.props.comp.jots ? this.showJots(this.props.compJots) : <div></div>}
+                        {this.props.compJots ? this.showJots(this.props.compJots) : <div></div>}
                     </Grid.Column>
 
                     <Grid.Column>
@@ -112,7 +112,6 @@ class SingleComposition extends React.Component {
                         {this.props.compInstruments ? this.showInstruments(this.props.compInstruments): <div></div>}
                     </Grid.Column>
                 </Grid>
-                {/* <Divider vertical></Divider> */}
             </Segment>
             </div>
         )

@@ -26,7 +26,7 @@ class AddInstrument extends React.Component{
 
     handleSubmit = () => {
         this.props.submitInstruments();
-        
+        this.props.history.push(`/compositions/${this.props.selectCompForInstruments.id}`)
     }
     render(){
         return(

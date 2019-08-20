@@ -7,9 +7,13 @@ class NewSongRef extends React.Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.submitNewSongRef(this.props.selectedComp)
-        //TODO: Redirect Back to Compositions
-        this.props.history.push(`/compositions/${this.props.selectedComp.id}`)
+        if(this.props.newYoutubeURL.includes("youtube.com")){
+            this.props.submitNewSongRef(this.props.selectedComp)
+            //TODO: Redirect Back to Compositions
+            this.props.history.push(`/compositions/${this.props.selectedComp.id}`)
+        } else{
+            window.alert("Invalid Youtube Link");
+        }
     }
 
     render(){

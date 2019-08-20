@@ -126,15 +126,6 @@ class App extends React.Component {
   }
 
   submitNewComp = (e) => {
-    //Clear the Error Message 
-    console.log(e.target.value)
-    
-    // if(this.state.newTitleForm === ""){
-    //   this.setState({
-    //     error: "Invalid Title"
-    //   })
-    //   window.alert("Invalid Title")
-    // } else{
       fetch(`${compositionsURL}`, {
         method: "POST",
         headers: {
@@ -184,7 +175,9 @@ class App extends React.Component {
       this.setState({
         selectedComp: json
       })
+      this.fetchCompositions();
     })
+    
   }
   /*-------------------------- */
 
@@ -268,24 +261,31 @@ class App extends React.Component {
     }
 
     submitScale = () => {
-      fetch(scalesURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accepts": "application/json"
-        },
-        body: JSON.stringify({
-          scale_name: this.state.newScale,
-          composition_id: this.state.selectedComp.id
+      // debugger
+      if(this.state.selectedComp.scales.some((scale) => {
+        return scale.scale_name === this.state.newScale
+      })){
+        window.alert("Scale already exists in this comp")
+      }else{
+        fetch(scalesURL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accepts": "application/json"
+          },
+          body: JSON.stringify({
+            scale_name: this.state.newScale,
+            composition_id: this.state.selectedComp.id
+          })
         })
-      })
-      .then(resp => resp.json())
-      .then(json => {
-        this.setState({
-          selectedComp_scales: [...this.state.selectedComp_scales, json],
+        .then(resp => resp.json())
+        .then(json => {
+          this.setState({
+            selectedComp_scales: [...this.state.selectedComp_scales, json],
+          })
+         this.fetchCompositions(); //////HEREREEEEEEE 
         })
-       this.fetchCompositions(); //////HEREREEEEEEE 
-      })
+      }   
     }
 
     /* Delete Scale */
@@ -512,13 +512,13 @@ class App extends React.Component {
         {/* New Composition */}
         <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp} newTitleForm={this.state.newTitleForm} resetNewCompForm={this.resetNewCompForm} allComps={this.state.compositions}/>)} />
         {/* New Song Reference */}
-        <Route exact path='/compositions/:id/newsongreference' render={(routerProps) => (<NewSongRef {...routerProps} handleNewSongRefInput={this.handleNewSongRefInput} submitNewSongRef={this.submitNewSongRef} selectedComp={this.state.selectedComp} />)} />
+        <Route exact path='/compositions/:id/newsongreference' render={(routerProps) => (<NewSongRef {...routerProps} handleNewSongRefInput={this.handleNewSongRefInput} submitNewSongRef={this.submitNewSongRef} selectedComp={this.state.selectedComp} newYoutubeURL={this.state.newYoutubeURL}/>)} />
         {/* New Scale */}
-        <Route exact path='/compositions/:id/newscale' render={(routerProps) => (<NewScale {...routerProps} selectedComp={this.state.selectedComp} handleNewScaleChoice={this.handleNewScaleChoice} submitScale={this.submitScale}/>)}/>
+        <Route exact path='/compositions/:id/newscale' render={(routerProps) => (<NewScale {...routerProps} selectedComp={this.state.selectedComp} handleNewScaleChoice={this.handleNewScaleChoice} submitScale={this.submitScale} allComps={this.state.allComps}/>)}/>
         {/* New Jot */}
         <Route exact path='/compositions/:id/newjot' render={(routerProps) => (<NewJot {...routerProps} selectedComp={this.state.selectedComp} handleNewJotInput={this.handleNewJotInput} submitJot={this.submitJot}/>)}/>
         {/* Add Instrument */}
-        <Route exact path='/addinstrument' render={(routerProps) => (<AddInstrument {...routerProps} allComps={this.state.compositions} selectCompForInstruments={this.selectCompForInstruments} submitInstruments={this.submitInstruments} updateInstruments={this.updateInstruments}/>)}/>
+        <Route exact path='/addinstrument' render={(routerProps) => (<AddInstrument {...routerProps} allComps={this.state.compositions} selectCompForInstruments={this.selectCompForInstruments} submitInstruments={this.submitInstruments} updateInstruments={this.updateInstruments} selectedComp={this.state.selectedComp}/>)}/>
         {/* Submit Instruments */}
         <Route exact path='/instrumentssubmitted' render={(routerProps) => (<InstrumentFormSubmitted {...routerProps} /> )}/>
 

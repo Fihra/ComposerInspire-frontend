@@ -30,8 +30,11 @@ class SingleComposition extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.updateTitle(this.props.comp)
-        this.props.history.goBack();
-        // this.props.history.push(`/compositions/${this.props.comp.id}`)
+        this.setState({
+            class: "hidden"
+        })
+        // this.props.history.goBack();
+        this.props.history.push(`/compositions/${this.props.comp.id}`)
     }
     /* Song Reference Functions */
     showSongReferences = (songRefs) => {

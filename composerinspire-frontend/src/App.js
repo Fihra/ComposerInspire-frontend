@@ -68,7 +68,6 @@ class App extends React.Component {
       
       /*-------------------------- */
 
-    
   }
 
   /* Fetch all compositions*/
@@ -233,6 +232,7 @@ class App extends React.Component {
           selectedComp_refs: newSelectedComp_refs
         })
       })
+      this.fetchCompositions();
     }
 
    /* --------------------- */
@@ -328,6 +328,7 @@ class App extends React.Component {
           selectedComp_jots: newSelectedComp_jots
         })
       })
+      this.fetchCompositions();
     }
 
     /* ----------------- */
@@ -443,6 +444,7 @@ class App extends React.Component {
           })
           .then(resp => resp.json())
           .then(json => console.log(json))
+          this.fetchCompositions();
   }
 
   deleteInstrument = (instrument) => {
@@ -459,6 +461,7 @@ class App extends React.Component {
         selectedComp_instruments: newSelectedComp_instruments
       })
     })
+    this.fetchCompositions();
 
   }
     /* ----------------- */

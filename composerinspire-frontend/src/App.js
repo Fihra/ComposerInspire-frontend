@@ -63,9 +63,11 @@ class App extends React.Component {
         savedElectrophones: [],
         savedIdiophones: [],
         savedMembranophones: [],
-        savedAllInstruments: []
-      }
+        savedAllInstruments: [],
       
+        errors: ''
+
+      }
       /*-------------------------- */
 
   }
@@ -101,6 +103,12 @@ class App extends React.Component {
       selectedComp_instruments: compInstruments
     })  
   }
+
+  /*--Clear Form Field-- */
+  clearField = () => {
+    this.setState(() => this.state)
+  }
+
   /*-------------------- */
 
   /* Add New Composition */
@@ -111,24 +119,39 @@ class App extends React.Component {
     })
   }
 
+  resetNewCompForm = () => {
+    this.setState({
+      newTitleForm: ''
+    })
+  }
+
   submitNewComp = (e) => {
-    fetch(`${compositionsURL}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accepts": "application/json"
-      },
-      body: JSON.stringify({
-        title: this.state.newTitleForm,
-        user_id: 1
+    //Clear the Error Message 
+    console.log(e.target.value)
+    
+    // if(this.state.newTitleForm === ""){
+    //   this.setState({
+    //     error: "Invalid Title"
+    //   })
+    //   window.alert("Invalid Title")
+    // } else{
+      fetch(`${compositionsURL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accepts": "application/json"
+        },
+        body: JSON.stringify({
+          title: this.state.newTitleForm,
+          user_id: 1
+        })
       })
-    })
-    .then(resp => resp.json())
-    .then(json => {
-      this.setState({
-        compositions: [...this.state.compositions, json]
+      .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          compositions: [...this.state.compositions, json]
+        })
       })
-    })
   }
 
   /* ------------------- */ 
@@ -416,35 +439,40 @@ class App extends React.Component {
     }
 
     transferAllInstruments = () => {
-      let compositionInstrumentArray = [];
+      // let compositionInstrumentArray = [];
 
-      let allSavedInstruments = [this.state.savedAerophones, this.state.savedChordophones, this.state.savedElectrophones, this.state.savedIdiophones, this.state.savedMembranophones]
+      let allSavedInstruments = [...this.state.savedAerophones, ...this.state.savedChordophones, ...this.state.savedElectrophones, ...this.state.savedIdiophones, ...this.state.savedMembranophones]
 
-      for(let i=0; i < allSavedInstruments.length; i++){
-        for(let j=0; j < allSavedInstruments[i].length; j++){
-          compositionInstrumentArray.push(allSavedInstruments[i][j]);
-        }
-      }
+      // for(let i=0; i < allSavedInstruments.length; i++){
+      //   for(let j=0; j < allSavedInstruments[i].length; j++){
+      //     compositionInstrumentArray.push(allSavedInstruments[i][j]);
+      //   }
+      // }
       this.setState({
-        savedAllInstruments: compositionInstrumentArray
+        savedAllInstruments: allSavedInstruments
       }, () => this.addInstrumentsFetch())
     }
 
     addInstrumentsFetch = () => {
-          fetch(instrumentsURL, {
-            method: "POST",
-            headers: {
-              'Content-Type': "application/json",
-              "Accepts": "application/json"
-            },
-            body: JSON.stringify({
-              instrument_name: this.state.savedAllInstruments.join(', '),
-              composition_id: this.state.selectedCompForAddingInstruments.id
-            })
+      //validate
+      if(this.state.savedAllInstruments.length < 1) {
+        window.alert("Please Enter at least 1 instrument")
+      } else{
+        fetch(instrumentsURL, {
+          method: "POST",
+          headers: {
+            'Content-Type': "application/json",
+            "Accepts": "application/json"
+          },
+          body: JSON.stringify({
+            instrument_name: this.state.savedAllInstruments.join(', '),
+            composition_id: this.state.selectedCompForAddingInstruments.id
           })
-          .then(resp => resp.json())
-          .then(json => console.log(json))
-          this.fetchCompositions();
+        })
+        .then(resp => resp.json())
+        .then(json => console.log(json))
+        this.fetchCompositions();
+      }  
   }
 
   deleteInstrument = (instrument) => {
@@ -482,7 +510,7 @@ class App extends React.Component {
         {/* Single Composition */}
         <Route exact path='/compositions/:id' render={(routerProps) => (<SingleComposition {...routerProps} comp={this.state.selectedComp} handleTitleInput={this.handleTitleInput} updateTitle={this.updateTitle} deleteSongRef={this.deleteSongRef} compScales={this.state.selectedComp_scales} compRefs={this.state.selectedComp_refs} deleteScale={this.deleteScale} compJots={this.state.selectedComp_jots} deleteJot={this.deleteJot} compInstruments={this.state.selectedComp_instruments} deleteInstrument={this.deleteInstrument}/> )}/>
         {/* New Composition */}
-        <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp}/>)} />
+        <Route exact path='/newcomposition' render={(routerProps) => (<NewComposition {...routerProps} handleNewCompInput={this.handleNewCompInput} submitNewComp={this.submitNewComp} newTitleForm={this.state.newTitleForm} resetNewCompForm={this.resetNewCompForm} allComps={this.state.compositions}/>)} />
         {/* New Song Reference */}
         <Route exact path='/compositions/:id/newsongreference' render={(routerProps) => (<NewSongRef {...routerProps} handleNewSongRefInput={this.handleNewSongRefInput} submitNewSongRef={this.submitNewSongRef} selectedComp={this.state.selectedComp} />)} />
         {/* New Scale */}

@@ -4,7 +4,7 @@ const InstrumentCard = (props) => {
     const { instrument_name } = props.instrument
 
     const deleteInstrument = () => {
-        console.log(props.instrument)
+        props.deleteInstrument(props.instrument)
     }
     return(
         <div>

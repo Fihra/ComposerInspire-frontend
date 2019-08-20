@@ -70,7 +70,9 @@ class NewChordProgression extends React.Component {
         })
     }
 
-    updatePitch = ()
+    updatePitch = () => {
+        
+    }
 
     get stave(){
         const stave = new VF.Stave(this.state.stave.x, this.state.stave.y, this.state.stave.saveWidth);

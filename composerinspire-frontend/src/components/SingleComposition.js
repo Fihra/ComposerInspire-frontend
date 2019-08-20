@@ -70,7 +70,7 @@ class SingleComposition extends React.Component {
     /* Instruments Functions */
     showInstruments = (instruments) => {
         return instruments.map((instrument, i) => {
-            return <InstrumentCard key={i} instrument={instrument}/>
+            return <InstrumentCard key={i} instrument={instrument} deleteInstrument={this.props.deleteInstrument}/>
         })
     }
 

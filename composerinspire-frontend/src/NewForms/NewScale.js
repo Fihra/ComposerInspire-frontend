@@ -38,12 +38,13 @@ class NewScale extends React.Component{
                 <h2>New Scale Form</h2>
                 <Form onSubmit={this.handleScaleSubmit}>
                     <Form.Dropdown
+                        className='new-scale-menu'
                         placeholder='Select Scale'
                         fluid search selection
                         onChange={this.handleScaleChoice}
                         options={this.showAllScales()}
                     />
-                    <Button type="submit">Submit</Button>
+                    <Button className="ui inverted blue button" type="submit">Submit</Button>
                 </Form>
                 
             </div>

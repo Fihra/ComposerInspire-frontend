@@ -87,7 +87,7 @@ class SingleComposition extends React.Component {
             <Segment>
                 <Grid columns={3} relaxed='very'>
                     <Grid.Column>
-                    <h2>{title} <button onClick={this.handleEditClick}><Icon name='edit outline'/></button></h2>
+                    <h2>{title} <Button icon onClick={this.handleEditClick}><Icon name='edit outline'/></Button></h2>
                     {!this.state.done && (
                     <form className={this.state.class} onSubmit={(e) => this.handleSubmit(e)}>
                         <input name="formTitleName" type="text" value={this.props.formTitleName} onChange={this.props.handleTitleInput}></input>

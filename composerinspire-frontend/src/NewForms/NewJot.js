@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Form, TextArea, Button } from 'semantic-ui-react';
 
 class NewJot extends React.Component{
     goingBack = () =>{
@@ -18,10 +18,10 @@ class NewJot extends React.Component{
             <div>
                 <h2>New Jot Down Form</h2>
                 {/* <button onClick={this.goingBack}>Back to Composition</button> */}
-                <form onSubmit={(e)=> {this.handleJotSubmit(e)}}>
-                    <input type="textarea" name="newJot" placeholder="Jot down something quick" onChange={this.props.handleNewJotInput}></input>
-                    <input type="submit" value="Submit"/>
-                </form>
+                <Form onSubmit={(e)=> {this.handleJotSubmit(e)}}>
+                    <TextArea className='new-jot-form' name="newJot" placeholder="Jot down something quick" onChange={this.props.handleNewJotInput}></TextArea>
+                    <Button className="ui inverted blue button" type="submit" value="Submit">Submit</Button>
+                </Form>
             </div>
         )
     }

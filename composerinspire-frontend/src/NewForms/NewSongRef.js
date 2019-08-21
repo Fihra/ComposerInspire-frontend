@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form, Button } from 'semantic-ui-react';
 
 class NewSongRef extends React.Component{
     goingBack = () =>{
@@ -20,13 +21,13 @@ class NewSongRef extends React.Component{
         return(
             <div>
                 <h2>New Song Reference Form</h2>
-                <button onClick={this.goingBack}>Back to Composition</button>
-                <form onSubmit={(e)=> {this.handleSubmit(e)}}>
-                    <input type="text" name="newSongTitle" placeholder="Title Name" onChange={this.props.handleNewSongRefInput}></input>
-                    <input type="text" name="newArtist" placeholder="Artist Name" onChange={this.props.handleNewSongRefInput}></input>
-                    <input type="text" name="newYoutubeURL" placeholder="Youtube Link" onChange={this.props.handleNewSongRefInput}></input>
-                    <input type="submit" value="Submit"/>
-                </form>
+                {/* <Button onClick={this.goingBack}>Back to Composition</Button> */}
+                <Form onSubmit={(e)=> {this.handleSubmit(e)}}>
+                    <Form.Input className='new-song-ref-form' type="text" name="newSongTitle" placeholder="Title Name" onChange={this.props.handleNewSongRefInput}></Form.Input>
+                    <Form.Input className='new-song-ref-form' type="text" name="newArtist" placeholder="Artist Name" onChange={this.props.handleNewSongRefInput}></Form.Input>
+                    <Form.Input className='new-song-ref-form' type="text" name="newYoutubeURL" placeholder="Youtube Link" onChange={this.props.handleNewSongRefInput}></Form.Input>
+                    <Button className="ui inverted blue button" type="submit" value="Submit">Submit</Button>
+                </Form>
             </div>
         )
     }

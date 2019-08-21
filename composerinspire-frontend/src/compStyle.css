@@ -21,6 +21,12 @@
 /* For All Cards */
 .delete-btn-position {
     float: right;
+    position: relative;
+}
+
+.submit-btn {
+    background-color: blue;
+    width: 200px;
 }
 /*---------------*/
 
@@ -53,6 +59,33 @@
 .song-ref-card {
     width: 500px;
     height: 250px;
+}
+
+/*---------------------*/
+
+/*----Forms----*/
+.new-comp-form {
+    width: 250px;
+    height: auto;
+}
+
+.comp-form-container {
+    padding: 25px;
+}
+
+.new-jot-form {
+    width: 100px;
+    height: 50px;
+}
+
+.new-song-ref-form {
+    width: 250px;
+    height: auto;
+}
+
+.new-scale-menu {
+    width: 250px;
+    height: auto;
 }
 
 /*---------------------*/

@@ -33,11 +33,13 @@ class NewComposition extends React.Component {
         return(
             <div>
                 <h2>New Composition Form</h2>
-                <Button onClick={this.goingBack}>Back to Compositions</Button>
+                <Button style={{margin: '25px'}} onClick={this.goingBack}>Back to Compositions</Button>
+                <div className='comp-form-container'>
                 <Form onSubmit={(e)=> {this.handleSubmit(e)}}>
-                    <Form.Input type="text" name="newTitleForm" placeholder="New Title" onChange={this.props.handleNewCompInput} error={this.state.titleError}/>
-                    <Button type="submit" color="blue">Submit</Button>
+                    <Form.Input className='new-comp-form' name="newTitleForm" placeholder="New Title" onChange={this.props.handleNewCompInput}/>
+                    <Button className="ui inverted blue button" type="submit">Submit</Button>
                 </Form>
+                </div>
             </div>
         )
     }

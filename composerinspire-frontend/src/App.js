@@ -514,8 +514,8 @@ class App extends React.Component {
         {/* Submit Instruments */}
         <Route exact path='/instrumentssubmitted' render={(routerProps) => (<InstrumentFormSubmitted {...routerProps} /> )}/>
 
-        {/* New Chord Progression */}
-        <Route exact path='/addchords' render={(routerProps) => (<NewChordProgression {...routerProps}/>)}/>
+        {/* Melody Generator */}
+        <Route exact path='/melodygenerator' render={(routerProps) => (<NewChordProgression {...routerProps}/>)}/>
         
 
         </div>

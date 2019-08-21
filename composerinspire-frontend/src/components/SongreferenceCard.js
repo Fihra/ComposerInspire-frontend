@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon, Segment } from 'semantic-ui-react';
 
 const SongreferenceCard = (props) => {
     const embedYoutubeURL = (yt) => {
@@ -13,8 +14,10 @@ const SongreferenceCard = (props) => {
         const {song_title, artist, youtube_url} = props.song;
         return(
             <div>
-                {`${artist}: ${song_title}`}<button onClick={() => handleDeleteClick()}>-</button>
+                <Segment>
+                <div>{`${artist}: ${song_title}`}<button onClick={() => handleDeleteClick()}><Icon name='trash alternate'/></button></div>
                 {embedYoutubeURL(youtube_url)}
+                </Segment>
             </div>
         )
 }

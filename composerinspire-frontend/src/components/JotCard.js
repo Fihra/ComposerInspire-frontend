@@ -1,4 +1,6 @@
 import React from 'react';
+import { Icon, List, Segment } from 'semantic-ui-react';
+import '../compStyle.css'
 
 const JotCard = (props) => {
     const { content } = props.jot
@@ -10,7 +12,9 @@ const JotCard = (props) => {
 
     return(
         <div>
-            <li>{content}<button onClick={handleDeleteClick}>-</button></li>
+            <Segment>
+            <List.Item>{content}<button className='instrument-btn-position' onClick={handleDeleteClick}><Icon name='trash alternate'/></button></List.Item>
+            </Segment>
         </div>
     )
 }

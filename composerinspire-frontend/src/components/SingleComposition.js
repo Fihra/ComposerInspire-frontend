@@ -3,7 +3,7 @@ import SongreferenceCard from './SongreferenceCard';
 import ScaleCard from './ScaleCard';
 import JotCard from './JotCard';
 import InstrumentCard from './InstrumentCard';
-import { Grid, Segment } from 'semantic-ui-react';
+import { Grid, Segment, Icon, Table, Button } from 'semantic-ui-react';
 
 class SingleComposition extends React.Component {
     state = {
@@ -87,28 +87,28 @@ class SingleComposition extends React.Component {
             <Segment>
                 <Grid columns={3} relaxed='very'>
                     <Grid.Column>
-                    <h3>{title} <button onClick={this.handleEditClick}>Edit</button></h3>
+                    <h2>{title} <button onClick={this.handleEditClick}><Icon name='edit outline'/></button></h2>
                     {!this.state.done && (
                     <form className={this.state.class} onSubmit={(e) => this.handleSubmit(e)}>
                         <input name="formTitleName" type="text" value={this.props.formTitleName} onChange={this.props.handleTitleInput}></input>
                         <input type="submit" value="Submit"/>
                     </form>)}
-                    <button onClick={(e) => this.handleJotClick(e)}>Quick Jot</button>
+                    <Button onClick={(e) => this.handleJotClick(e)}>Quick Jot</Button>
                         {this.props.compJots ? this.showJots(this.props.compJots) : <div></div>}
                     </Grid.Column>
 
                     <Grid.Column>
-                        <h4>Song References<button onClick={(e) => this.handleSongRefClick(e)}>+</button></h4>
+                        <h3>Song References<button onClick={(e) => this.handleSongRefClick(e)}><Icon name='plus'/></button></h3>
                         {this.props.compRefs ? this.showSongReferences(this.props.compRefs): <div></div>}
                     </Grid.Column>
                 
                     <Grid.Column>        
-                        <h4>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}>+</button></h4>
+                        <h3>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}><Icon name='plus'/></button></h3>
                         {this.props.compScales ? this.showScales(this.props.compScales): <div></div>}
                     </Grid.Column>
 
                     <Grid.Column>        
-                        <h4>Saved Instruments</h4>
+                        <h3>Saved Instruments</h3>
                         {this.props.compInstruments ? this.showInstruments(this.props.compInstruments): <div></div>}
                     </Grid.Column>
                 </Grid>

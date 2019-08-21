@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { Button } from 'semantic-ui-react';
 
 class CompositionCard extends React.Component { 
    
@@ -23,7 +24,7 @@ class CompositionCard extends React.Component {
             
             <div>
             <Link to={`/compositions/${this.props.comp.id}`}><h3 onClick={() => {this.handleCardClick(this.props.comp)}}>{title}</h3></Link>
-                <button onClick={() => this.handleDeleteBtnClick(this.props.comp)}>Delete</button>
+                <Button onClick={() => this.handleDeleteBtnClick(this.props.comp)}>Delete</Button>
             </div>
             
         )

@@ -17,3 +17,9 @@
     width: 10%;
     height: 10%;
 }
+
+/*Instrument Card*/
+
+.instrument-btn-position {
+    float: right;
+}

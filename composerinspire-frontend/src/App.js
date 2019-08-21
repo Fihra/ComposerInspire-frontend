@@ -63,10 +63,7 @@ class App extends React.Component {
         savedElectrophones: [],
         savedIdiophones: [],
         savedMembranophones: [],
-        savedAllInstruments: [],
-      
-        errors: ''
-
+        savedAllInstruments: []
       }
       /*-------------------------- */
 
@@ -441,25 +438,18 @@ class App extends React.Component {
     }
 
     transferAllInstruments = () => {
-      // let compositionInstrumentArray = [];
+    let allSavedInstruments = [...this.state.savedAerophones, ...this.state.savedChordophones, ...this.state.savedElectrophones, ...this.state.savedIdiophones, ...this.state.savedMembranophones]
 
-      let allSavedInstruments = [...this.state.savedAerophones, ...this.state.savedChordophones, ...this.state.savedElectrophones, ...this.state.savedIdiophones, ...this.state.savedMembranophones]
-
-      // for(let i=0; i < allSavedInstruments.length; i++){
-      //   for(let j=0; j < allSavedInstruments[i].length; j++){
-      //     compositionInstrumentArray.push(allSavedInstruments[i][j]);
-      //   }
-      // }
       this.setState({
         savedAllInstruments: allSavedInstruments
       }, () => this.addInstrumentsFetch())
     }
 
     addInstrumentsFetch = () => {
-      //validate
       if(this.state.savedAllInstruments.length < 1) {
         window.alert("Please Enter at least 1 instrument")
-      } else{
+      } 
+      else{
         fetch(instrumentsURL, {
           method: "POST",
           headers: {
@@ -520,7 +510,7 @@ class App extends React.Component {
         {/* New Jot */}
         <Route exact path='/compositions/:id/newjot' render={(routerProps) => (<NewJot {...routerProps} selectedComp={this.state.selectedComp} handleNewJotInput={this.handleNewJotInput} submitJot={this.submitJot}/>)}/>
         {/* Add Instrument */}
-        <Route exact path='/addinstrument' render={(routerProps) => (<AddInstrument {...routerProps} allComps={this.state.compositions} selectCompForInstruments={this.selectCompForInstruments} submitInstruments={this.submitInstruments} updateInstruments={this.updateInstruments} selectedComp={this.state.selectedComp}/>)}/>
+        <Route exact path='/addinstrument' render={(routerProps) => (<AddInstrument {...routerProps} allComps={this.state.compositions} selectCompForInstruments={this.selectCompForInstruments} submitInstruments={this.submitInstruments} updateInstruments={this.updateInstruments} selectedCompForAddingInstruments={this.state.selectedCompForAddingInstruments}/>)}/>
         {/* Submit Instruments */}
         <Route exact path='/instrumentssubmitted' render={(routerProps) => (<InstrumentFormSubmitted {...routerProps} /> )}/>
 

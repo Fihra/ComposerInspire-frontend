@@ -27,7 +27,6 @@ class NewScale extends React.Component{
     }
 
     handleScaleSubmit = () => {
-        //VALIDATE SCALE IF IT ALREADY EXISTS
         this.props.submitScale();
         this.props.history.push(`/compositions/${this.props.selectedComp.id}`)
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Vex from 'vexflow';
+import { Button } from 'semantic-ui-react';
 
 const VF = Vex.Flow;
 
@@ -44,10 +45,15 @@ class NewChordsScore extends React.Component {
         this.props.noteToggle()
     }
 
+    handlePlayToggle = (e) => {
+        this.props.playToggle()
+    }
+
     render(){
         return(
             <div>
-                <button onClick={this.handleNoteToggle}><span>{this.props.toggledNoteInputBtnSpan}</span></button>
+                <Button onClick={this.handleNoteToggle}><span>{this.props.toggledNoteInputBtnSpan}</span></Button>
+                <Button onClick={this.handlePlayToggle}><span>{this.props.toggleIsPlaying}</span></Button>
                 <div ref={'wrapper'}>
                     </div>
             </div>

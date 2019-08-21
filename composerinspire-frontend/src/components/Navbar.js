@@ -11,7 +11,8 @@ const Navbar = (props) => {
             <Menu.Item as={ Link } name='add-instrument' to='/addinstrument'>Add Instrument</Menu.Item>
             {/* <Menu.Item onClick={() => props.history.push('/')}>Home</Menu.Item>
             <Menu.Item onClick={() => props.history.push('/compositions')}>Compositions</Menu.Item> */}
-            <Menu.Item as={ Link } name='add-chords' to='/addchords'>New Chord Progression</Menu.Item>
+            {/* Chord Progression Playground */}
+            <Menu.Item as={ Link } name='add-chords' to='/addchords'>Melody Generator</Menu.Item>
 
         </Menu>
     )

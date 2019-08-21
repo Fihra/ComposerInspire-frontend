@@ -1,6 +1,8 @@
 import React from 'react';
 import Vex from 'vexflow';
-import  NewChordsScore from '../containers/NewChordsScore';
+import NewChordsScore from '../containers/NewChordsScore';
+import ChordInstructions from '../containers/ChordInstructions';
+import Tone from 'tone';
 
 const VF = Vex.Flow;
 
@@ -22,7 +24,10 @@ class NewChordProgression extends React.Component {
             savedNote: "",
             isNoteInputOn: false,
             toggledNoteInputBtnSpan: "Note Toggle On",
-            onCurrentNoteIndex: 0
+            onCurrentNoteIndex: 0,
+            toggleIsPlaying: "Play",
+            isPlaying: false
+
         }
     }
 
@@ -61,21 +66,35 @@ class NewChordProgression extends React.Component {
                     case "a":
                     case "b":
                         noteInput = e.key;
-
+                        this.updatePitch(noteInput);
                     default:
-                        break;
+                    break;
                 }
             }
-
         })
     }
 
-    updatePitch = () => {
-        
-    }
+    updatePitch = (noteInput) => {
+        this.setState({
+          savedNote: noteInput
+        })
+        this.setState((state) => {
+          return {
+            notes: state.notes.map((note, idx) => {
+    
+              if (idx === state.onCurrentNoteIndex) {
+                return new VF.StaveNote({
+                  keys: [`${state.savedNote}/4`], duration: "q"})
+
+              }
+              return note;
+            }) 
+          }
+        })
+    } 
 
     get stave(){
-        const stave = new VF.Stave(this.state.stave.x, this.state.stave.y, this.state.stave.saveWidth);
+        const stave = new VF.Stave(this.state.stave.x, this.state.stave.y, this.state.stave.staveWidth);
         stave.addClef("treble").addTimeSignature('4/4');
         return stave;
     }
@@ -102,9 +121,69 @@ class NewChordProgression extends React.Component {
         }
     }
 
+    playToggle = (e) => {
+        let chosenNotes = this.state.notes.map((note) => {
+            return note.keys[0].split("/")[0].toUpperCase();
+        })
+        console.log(chosenNotes)
+
+        if(!this.state.isPlaying){
+            this.setState({
+                toggleIsPlaying: "Stop",
+                isPlaying: true
+            })
+            const synth = new Tone.Synth().toMaster();
+            Tone.Transport.bpm.value = 150;
+
+            let melody = [
+                [`${chosenNotes[0]}4`, "4n"],
+                [`${chosenNotes[1]}4`, "4n"],
+                [`${chosenNotes[2]}4`, "4n"],
+                [`${chosenNotes[3]}4`, "4n"]
+            ];
+
+            let t = Tone.now();
+            for(const note of melody){
+                if(note[0] !== 'rest'){
+                    synth.triggerAttackRelease(note[0], Tone.Time(note[1]) - 0.1, t);
+                }
+                t += Tone.Time(note[1]);
+            }
+
+
+            // let synth = new Tone.Synth().toMaster()
+            // let synth2 = new Tone.Synth().toMaster()
+            // let synth3 = new Tone.Synth().toMaster()
+            // let synth4 = new Tone.Synth().toMaster()
+            // synth.triggerAttackRelease('C4', '4n')
+            // synth2.triggerAttackRelease('D4', '4n')
+            // synth3.triggerAttackRelease('E4', '4n')
+            // synth4.triggerAttackRelease('F4', '4n')
+            // seq.triggerAttackRelease();
+            
+            //C/4 = 261.63
+
+
+            
+        } else {
+            this.setState({
+                toggleIsPlaying: "Play",
+                isPlaying: false
+            })
+ 
+        }
+    }
+
+    /* Audio API */
+    playback = () => {
+        
+    }
+    /*---------------- */
+
     render(){
         return(
             <div>
+                <ChordInstructions/>
                 <NewChordsScore
                 height={this.state.height}
                 width={this.state.width}
@@ -114,6 +193,8 @@ class NewChordProgression extends React.Component {
                 voice={this.voice}
                 noteToggle={this.noteToggle}
                 toggledNoteInputBtnSpan={this.state.toggledNoteInputBtnSpan}
+                toggleIsPlaying={this.state.toggleIsPlaying}
+                playToggle={this.playToggle}
                 />
             </div>
         )

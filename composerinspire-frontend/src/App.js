@@ -13,7 +13,7 @@ import NewJot from './NewForms/NewJot';
 import AddInstrument from './NewForms/AddInstrument';
 import InstrumentFormSubmitted from './components/InstrumentFormSubmitted';
 import NewChordProgression from './NewForms/NewChordProgression';
-
+import './compStyle.css';
 
 const compositionsURL = "http://localhost:3000/compositions"
 const songreferencesURL = "http://localhost:3000/songreferences"

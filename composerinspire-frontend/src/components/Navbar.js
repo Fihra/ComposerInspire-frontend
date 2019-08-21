@@ -5,7 +5,7 @@ import { withRouter } from 'react-router'
 
 const Navbar = (props) => {
     return(
-        <Menu>
+        <Menu pointing>
             <Menu.Item as={ Link } name='home' to='/'>Home</Menu.Item>
             <Menu.Item as={ Link } name='compositions' to='/compositions'>Compositions</Menu.Item>
             <Menu.Item as={ Link } name='add-instrument' to='/addinstrument'>Add Instrument</Menu.Item>

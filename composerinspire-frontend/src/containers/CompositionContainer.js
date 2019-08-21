@@ -25,7 +25,7 @@ class CompositionContainer extends React.Component {
         
         return(
             <div>
-                <h2><span role="img">🎼</span> My Compositions<div>{this.addButton()}</div></h2>
+                <h1><span role="img">🎼</span> My Compositions<div>{this.addButton()}</div></h1>
                 {this.allCompositions()}
     
             </div>

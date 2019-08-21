@@ -3,7 +3,7 @@ import SongreferenceCard from './SongreferenceCard';
 import ScaleCard from './ScaleCard';
 import JotCard from './JotCard';
 import InstrumentCard from './InstrumentCard';
-import { Grid, Segment, Icon, Table, Button } from 'semantic-ui-react';
+import { Grid, Segment, Icon, Table, Button, Divider } from 'semantic-ui-react';
 
 class SingleComposition extends React.Component {
     state = {
@@ -102,11 +102,11 @@ class SingleComposition extends React.Component {
                         {this.props.compRefs ? this.showSongReferences(this.props.compRefs): <div></div>}
                     </Grid.Column>
                 
-                    <Grid.Column>        
+                    <Grid.Column>   
                         <h3>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}><Icon name='plus'/></button></h3>
                         {this.props.compScales ? this.showScales(this.props.compScales): <div></div>}
                     </Grid.Column>
-
+                    <Divider />
                     <Grid.Column>        
                         <h3>Saved Instruments</h3>
                         {this.props.compInstruments ? this.showInstruments(this.props.compInstruments): <div></div>}

@@ -18,17 +18,41 @@
     height: 10%;
 }
 
-/*Instrument Card*/
-
-.instrument-btn-position {
+/* For All Cards */
+.delete-btn-position {
     float: right;
 }
+/*---------------*/
+
+/*Composition Card*/
+.comp-container {
+    width: 1600px;
+    height: 1800px;
+}
+
+.title {
+    color: #4F5D75;
+}
+
+.each-container {
+    width: 350px;
+    height: 200px;
+    position: relative;
+}
+/*----------------*/
+
+/*Instrument Card*/
 
 .container-bg {
     background-color: #A6B7BB;
 
 }
+/*----------------*/
 
-body {
-    background-color: #A6B7BB;
+/* Song Reference Card */
+.song-ref-card {
+    width: 500px;
+    height: 250px;
 }
+
+/*---------------------*/

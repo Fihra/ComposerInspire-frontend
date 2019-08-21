@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Icon, Segment } from 'semantic-ui-react';
+import { List, Icon, Segment, Button } from 'semantic-ui-react';
 import '../compStyle.css';
 
 const InstrumentCard = (props) => {
@@ -11,7 +11,7 @@ const InstrumentCard = (props) => {
     return(
         <div>
             <Segment>
-            <List.Item>{instrument_name}<button className='instrument-btn-position' onClick={deleteInstrument}><Icon name='trash alternate'/></button></List.Item>
+            <List.Item>{instrument_name}<Button icon className='delete-btn-position' onClick={deleteInstrument}><Icon name='trash alternate'/></Button></List.Item>
             </Segment>
         </div>
     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Segment } from 'semantic-ui-react';
+import { Icon, Segment, Card, Description, Button } from 'semantic-ui-react';
 
 const SongreferenceCard = (props) => {
     const embedYoutubeURL = (yt) => {
@@ -12,12 +12,23 @@ const SongreferenceCard = (props) => {
     }
     
         const {song_title, artist, youtube_url} = props.song;
+        // return(
+        //     <div>
+        //         <Segment>
+        //         <div>{`${artist}: ${song_title}`}<button onClick={() => handleDeleteClick()}><Icon name='trash alternate'/></button></div>
+        //         {embedYoutubeURL(youtube_url)}
+        //         </Segment>
+        //     </div>
+        // )
         return(
             <div>
-                <Segment>
-                <div>{`${artist}: ${song_title}`}<button onClick={() => handleDeleteClick()}><Icon name='trash alternate'/></button></div>
+                <Card className='song-ref-card'>
                 {embedYoutubeURL(youtube_url)}
-                </Segment>
+                    <Card.Content>
+                        <Card.Header>{artist}</Card.Header>
+                        <Card.Description>{song_title}<Button className='delete-btn-position' icon onClick={() => handleDeleteClick()}><Icon name='trash alternate'/></Button></Card.Description>
+                    </Card.Content>
+                </Card>
             </div>
         )
 }

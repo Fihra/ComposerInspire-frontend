@@ -1,12 +1,26 @@
 import React from 'react';
 import Tone from 'tone';
+import ChangeSound from './ChangeSound';
 import '../piano.css';
 
 class Piano extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            waveformSaved: "sine"   
+        }
+    }
+
+    handleWaveformChoice = (wfChoice) => {
+        this.setState({
+          waveformSaved: wfChoice
+        })
+      }
 
     componentDidMount(){
         const synth = new Tone.Synth();
-        synth.oscillator.type = 'sine';
+        console.log(this.state.waveformSaved)
+        synth.oscillator.type = this.state.waveformSaved;
         synth.toMaster();
         const piano = document.getElementById('piano');
         piano.addEventListener("keydown", (e) => {
@@ -43,6 +57,8 @@ class Piano extends React.Component {
                     return synth.triggerAttack("A#4");
                 case "l":
                     return synth.triggerAttack("B4");
+                case ";":
+                    return synth.triggerAttack("C5");
                 default:
                     return;
 
@@ -63,6 +79,7 @@ class Piano extends React.Component {
                 case "k":
                 case "o":
                 case "l":
+                case ";":
                     synth.triggerRelease();        
             
             }
@@ -101,7 +118,11 @@ class Piano extends React.Component {
                     <li data-note='B4' className='key'>
                     L
                     </li>
+                    <li data-note='B4' className='key'>
+                    ;
+                    </li>
                 </ul>
+                <ChangeSound handleWaveformChoice={this.handleWaveformChoice}/>
             </div>
         )
     }

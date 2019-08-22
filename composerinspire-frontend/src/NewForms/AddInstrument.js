@@ -59,7 +59,7 @@ class AddInstrument extends React.Component{
                         </Grid.Column>
                     </Grid>
                 </Segment>
-                <Button type="submit">Submit</Button> 
+                <Button className="ui inverted blue button" type="submit">Submit</Button> 
                 </Form>
             </div>
         )

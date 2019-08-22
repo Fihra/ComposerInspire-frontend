@@ -34,6 +34,18 @@
     Height: 200;
 }
 
+.title-container {
+    border-style: outset;
+    margin-bottom: 20px;
+    /* border-left: outset;
+    border-right: outset; */
+    
+}
+
+.card-container {
+    border-style: inset;
+}
+
 /* <Container style={{overflow: 'auto', maxHeight: 200 }}> */
 
 /*---------------*/

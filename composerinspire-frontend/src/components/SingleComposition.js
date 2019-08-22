@@ -3,7 +3,7 @@ import SongreferenceCard from './SongreferenceCard';
 import ScaleCard from './ScaleCard';
 import JotCard from './JotCard';
 import InstrumentCard from './InstrumentCard';
-import { Grid, Segment, Icon, Table, Button, Divider, Container } from 'semantic-ui-react';
+import { Grid, Segment, Icon, Table, Button, Divider, Container, Form } from 'semantic-ui-react';
 
 class SingleComposition extends React.Component {
     state = {
@@ -87,38 +87,40 @@ class SingleComposition extends React.Component {
             <Segment>
                 <Grid columns={3} relaxed='very'>
                     <Grid.Column>
+                    <Container className='title-container'>
                     <h2>{title} <Button icon onClick={this.handleEditClick}><Icon name='edit outline'/></Button></h2>
                     {!this.state.done && (
-                    <form className={this.state.class} onSubmit={(e) => this.handleSubmit(e)}>
+                    <Form className={this.state.class} onSubmit={(e) => this.handleSubmit(e)}>
                         <input name="formTitleName" type="text" value={this.props.formTitleName} onChange={this.props.handleTitleInput}></input>
-                        <input type="submit" value="Submit"/>
-                    </form>)}
+                        <Button className="ui inverted blue button" type="submit" value="Submit">Submit</Button>
+                        {/* <input type="submit" value="Submit"/> */}
+                    </Form>)}
+                    </Container>
                     
                     <Button onClick={(e) => this.handleJotClick(e)}>Quick Jot</Button>
-                    <Container style={{overflow: 'auto', maxHeight: 250 }}>
+                    <Container className='card-container' style={{overflow: 'auto', maxHeight: 250 }}>
                         {this.props.compJots ? this.showJots(this.props.compJots) : <div></div>}
                     </Container>
                     </Grid.Column>
 
                     <Grid.Column>
-                        
-                        <h3>Song References<button onClick={(e) => this.handleSongRefClick(e)}><Icon name='plus'/></button></h3>
+                        <h3 className='title-container'>Song References<button onClick={(e) => this.handleSongRefClick(e)}><Icon name='plus'/></button></h3>
                         {/* <Container className='containerScroll'> */}
-                        <Segment style={{overflow: 'auto', maxHeight: 250 }}>
+                        <Segment className='card-container' style={{overflow: 'auto', maxHeight: 250 }}>
                         {this.props.compRefs ? this.showSongReferences(this.props.compRefs): <div></div>}
                         </Segment>
                     </Grid.Column>
                 
                     <Grid.Column>   
-                        <Container style={{overflow: 'auto', maxHeight: 250 }}>
-                        <h3>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}><Icon name='plus'/></button></h3>
+                        <h3 className='title-container'>Saved Scales<button onClick={(e) => this.handleScaleClick(e)}><Icon name='plus'/></button></h3>
+                        <Container className='card-container' style={{overflow: 'auto', maxHeight: 250 }}>
                         {this.props.compScales ? this.showScales(this.props.compScales): <div></div>}
                         </Container>
                     </Grid.Column>
                     <Divider />
-                    <Grid.Column> 
-                        <Container>       
-                        <h3>Saved Instruments</h3>
+                    <Grid.Column>        
+                        <h3 className='title-container'>Saved Instruments</h3>
+                        <Container className='card-container'>
                         {this.props.compInstruments ? this.showInstruments(this.props.compInstruments): <div></div>}
                         </Container>
                     </Grid.Column>

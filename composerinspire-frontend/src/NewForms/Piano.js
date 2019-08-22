@@ -127,6 +127,7 @@ class Piano extends React.Component {
                     </li>
                 </ul>
                 {/* <ChangeSound handleWaveformChoice={this.handleWaveformChoice}/> */}
+                <p>Credit to <a href='https://dev.to/shimphillip/building-a-piano-with-tone-js-5c2f'>@shimphillip</a> for their "Building a piano with tone.js!" Blog.</p>
             </div>
         )
     }

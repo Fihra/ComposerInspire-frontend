@@ -1,7 +1,8 @@
 import React from 'react';
 import Login from './Login';
 import SignUp from '../NewForms/SignUp';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Image, Container } from 'semantic-ui-react';
+import sheetMusicImg from '../assets/sheetmusic.jpeg';
 
 class Home extends React.Component {
 
@@ -19,6 +20,10 @@ class Home extends React.Component {
                 <h3>Happy Composing!</h3>
                 <p style={{textAlign:"center"}}>©Fabian Fabro 2019</p>
                 </Segment>
+                <Container floated='left'>
+                    <Image src={sheetMusicImg} size='large'/>
+                </Container>
+                
                 {/* <Segment floated='right'>
                     <Login />
                     <SignUp />

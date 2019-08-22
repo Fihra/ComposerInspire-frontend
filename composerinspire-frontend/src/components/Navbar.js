@@ -12,6 +12,7 @@ const Navbar = (props) => {
             {/* Melody Generator Playground */}
             <Menu.Item as={ Link } name='melody-generator' to='/melodygenerator'>Melody Generator</Menu.Item>
             <Menu.Item as={ Link } name='piano' to='/virtualpiano'>Virtual Piano</Menu.Item>
+            {/* <Menu.Item as={ Link } name='metronome' to='/metronome'>Metronome</Menu.Item> */}
 
         </Menu>
     )

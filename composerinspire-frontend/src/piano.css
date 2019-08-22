@@ -3,6 +3,10 @@ ul {
     display: flex;
 }
 
+ul .key-hit {
+    background: rgb(59, 59, 255);
+}
+
 ul .key {
     position: relative;
     width: 60px;

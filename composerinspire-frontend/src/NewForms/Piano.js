@@ -17,6 +17,10 @@ class Piano extends React.Component {
         })
       }
 
+      componentDidUpdate(prevProps){
+          console.log(prevProps);
+      }
+
     componentDidMount(){
         const synth = new Tone.Synth();
         console.log(this.state.waveformSaved)
@@ -122,7 +126,7 @@ class Piano extends React.Component {
                     ;
                     </li>
                 </ul>
-                <ChangeSound handleWaveformChoice={this.handleWaveformChoice}/>
+                {/* <ChangeSound handleWaveformChoice={this.handleWaveformChoice}/> */}
             </div>
         )
     }

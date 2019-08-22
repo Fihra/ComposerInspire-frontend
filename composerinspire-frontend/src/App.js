@@ -14,6 +14,7 @@ import AddInstrument from './NewForms/AddInstrument';
 import InstrumentFormSubmitted from './components/InstrumentFormSubmitted';
 import NewChordProgression from './NewForms/NewChordProgression';
 import Piano from './NewForms/Piano';
+import Metronome from './NewForms/Metronome';
 import './compStyle.css';
 
 const compositionsURL = "http://localhost:3000/compositions"
@@ -519,6 +520,8 @@ class App extends React.Component {
         <Route exact path='/melodygenerator' render={(routerProps) => (<NewChordProgression {...routerProps}/>)}/>
         {/* Virtual Piano */}
         <Route exact path='/virtualpiano' render={(routerProps) => (<Piano {...routerProps}/>)}/>
+        {/* Metronome */}
+        <Route exact path='/metronome' render={(routerProps) => (<Metronome {...routerProps}/>)}/>
 
         
 

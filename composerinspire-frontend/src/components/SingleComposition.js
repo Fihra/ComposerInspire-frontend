@@ -118,12 +118,12 @@ class SingleComposition extends React.Component {
                         </Container>
                     </Grid.Column>
                     <Divider />
-                    <Grid.Column>        
+                    <div>
                         <h3 className='title-container'>Saved Instruments</h3>
-                        <Container className='card-container'>
+                        <Container className='instrument-container'>
                         {this.props.compInstruments ? this.showInstruments(this.props.compInstruments): <div></div>}
                         </Container>
-                    </Grid.Column>
+                    </div>
                 </Grid>
             </Segment>
             </div>

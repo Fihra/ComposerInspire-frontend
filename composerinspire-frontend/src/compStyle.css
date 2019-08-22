@@ -20,8 +20,11 @@
 
 /* For All Cards */
 .delete-btn-position {
-    float: right;
-    position: relative;
+    /* float: right; */
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    
 }
 
 .submit-btn {
@@ -44,6 +47,30 @@
 
 .card-container {
     border-style: inset;
+}
+
+/* Scale Cards */
+
+.scale-delete-btn {
+    position: absolute;
+}
+
+/* Instrument Cards */
+.instrument-container {
+    border-style: inset;
+    height: 300px;
+    width: 800px;
+    justify-content: center;
+    display: flex;
+    overflow: auto;
+
+}
+
+.instrument-card {
+    width: 180px;
+    height: auto;
+    display: inline-block;
+    
 }
 
 /* <Container style={{overflow: 'auto', maxHeight: 200 }}> */

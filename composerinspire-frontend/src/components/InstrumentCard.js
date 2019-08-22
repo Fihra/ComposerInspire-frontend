@@ -9,7 +9,7 @@ const InstrumentCard = (props) => {
         props.deleteInstrument(props.instrument)
     }
     return(
-        <div>
+        <div className='instrument-card'>
             <Segment>
             <List.Item>{instrument_name}<Button icon className='delete-btn-position' onClick={deleteInstrument}><Icon name='trash alternate'/></Button></List.Item>
             </Segment>

@@ -12,7 +12,7 @@ class ScaleCard extends React.Component {
         const {scale_name} = this.props.scale;
         return(
             <div>   
-                <img className="scale-img" src={AllScales[`${scale_name}`]} alt={scale_name}></img><Button icon onClick={this.handleDeleteClick}><Icon name='trash alternate'/></Button>
+                <img className="scale-img" src={AllScales[`${scale_name}`]} alt={scale_name}></img><Button className='scale-delete-btn' icon onClick={this.handleDeleteClick}><Icon name='trash alternate'/></Button>
  
             </div>
         )

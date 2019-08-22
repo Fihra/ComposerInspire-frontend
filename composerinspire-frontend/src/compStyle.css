@@ -28,6 +28,14 @@
     background-color: blue;
     width: 200px;
 }
+
+.containerScroll {
+    overflow: auto;
+    Height: 200;
+}
+
+/* <Container style={{overflow: 'auto', maxHeight: 200 }}> */
+
 /*---------------*/
 
 /*Composition Card*/

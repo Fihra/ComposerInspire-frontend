@@ -9,10 +9,9 @@ const Navbar = (props) => {
             <Menu.Item as={ Link } name='home' to='/'>Home</Menu.Item>
             <Menu.Item as={ Link } name='compositions' to='/compositions'>Compositions</Menu.Item>
             <Menu.Item as={ Link } name='add-instrument' to='/addinstrument'>Add Instrument</Menu.Item>
-            {/* <Menu.Item onClick={() => props.history.push('/')}>Home</Menu.Item>
-            <Menu.Item onClick={() => props.history.push('/compositions')}>Compositions</Menu.Item> */}
-            {/* Chord Progression Playground */}
-            <Menu.Item as={ Link } name='melody-generator' to='melodygenerator'>Melody Generator</Menu.Item>
+            {/* Melody Generator Playground */}
+            <Menu.Item as={ Link } name='melody-generator' to='/melodygenerator'>Melody Generator</Menu.Item>
+            <Menu.Item as={ Link } name='piano' to='/virtualpiano'>Virtual Piano</Menu.Item>
 
         </Menu>
     )

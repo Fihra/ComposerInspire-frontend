@@ -13,6 +13,7 @@ import NewJot from './NewForms/NewJot';
 import AddInstrument from './NewForms/AddInstrument';
 import InstrumentFormSubmitted from './components/InstrumentFormSubmitted';
 import NewChordProgression from './NewForms/NewChordProgression';
+import Piano from './NewForms/Piano';
 import './compStyle.css';
 
 const compositionsURL = "http://localhost:3000/compositions"
@@ -516,6 +517,9 @@ class App extends React.Component {
 
         {/* Melody Generator */}
         <Route exact path='/melodygenerator' render={(routerProps) => (<NewChordProgression {...routerProps}/>)}/>
+        {/* Virtual Piano */}
+        <Route exact path='/virtualpiano' render={(routerProps) => (<Piano {...routerProps}/>)}/>
+
         
 
         </div>
